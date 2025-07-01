@@ -1,103 +1,104 @@
+"use client"
 import Image from "next/image";
+import {useAnimate, motion, stagger} from "motion/react"
+import profile from "./assets/protfolio-image.png"
+import React, { useEffect, useRef, useState } from "react";
+import Navbar from "./components/navbar/navbar"
+import {IconBrandGithub, IconBrandLinkedin, IconBrandLinkedinFilled, IconBrandTwitter, IconX} from "@tabler/icons-react"
+import linkedIn from "./assets/linkedIn.svg"
+
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  const [scope,animate]  = useAnimate();
+  const [mousePosition, setMousePosition] = useState<{x:number,y:number}>({x:0, y:0});
+  function FadingName(){
+    animate(".cuties",
+      {opacity: [0,1], filter: ["blur(10px)", "blur(0px)"]},
+      {delay: stagger(0.05)})
+  }
+
+ function getRelativeCoordinates(event, referenceElement) {
+  console.log(scope.current)
+   const rect = {
+    left: referenceElement.offsetLeft,
+    top: referenceElement.offsetTop
+   }
+  console.log(rect.left,rect.top);
+  
+  const res =  {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top
+  };
+  console.log(res);
+  return res;
+}
+  
+const handleMouseMove = (e) => {
+    setMousePosition(getRelativeCoordinates(e, scope.current));
+  };
+
+  useEffect(()=>{
+    FadingName()
+  },[])
+  return (
+  
+    <div ref={scope} className="min-h-screen w-[100vw] bg-neutral-950 flex justify-center items-center pointer " onMouseMove={(e)=>{
+      handleMouseMove(e)
+    }}>
+      <motion.span className="w-4 h-4 bg-white rounded-full relative z-49 " style={{pointerEvents: "none"}} 
+      animate={{x: mousePosition.x -12 +"px", y:mousePosition.y + "px"}}
+      transition={{type: "tween"}} >
+        <motion.span className="w-2 h-2 rounded-full bg-black absolute inset-0 m-auto z-50"
+      
+        ></motion.span>
+      </motion.span>
+      <div className="absolute right-0 top-0 m-10">
+     <Navbar width={"3rem"} height="2.5rem" strokeWidth="5px"></Navbar>
+      </div>
+   
+    <div className="flex flex-col h-full flex-1 gap-6 items-center ">
+      <div className="flex items-center flex-col relative" >
+        <Image className="rounded-full hover:scale-[1.02] active:scale-[0.98] transition-scale duration-300 " width={400} src={profile} alt="profile" onClick={FadingName}></Image>
+      <div className=" text-8xl flex gap-6 absolute bottom-2 " >
+      <SplitedText word={"Ramanshu"} className="m-1"></SplitedText>
+      <SplitedText word={"Sharan"} className="m-1"></SplitedText>
+      <SplitedText word={"Mishra"} className="m-1"></SplitedText>
+      </div>
+      </div>
+       
+      <div className="flex items-center justify-center text-xl font-bold italic"> I am someone who is trying to build something</div>
     </div>
+
+    <div className="absolute flex justify-around items-center w-fit bottom-6 right-10 gap-8">
+      <IconBrandGithub className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300"></IconBrandGithub>
+      <IconBrandTwitter className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300"></IconBrandTwitter>
+      <Image src={linkedIn} className="text-neutral-50 hover:scale-[1.3] active:scale-[0.98] transition-all duration-300" alt="linkedIn"></Image>
+      <div className="font-bold hover:scale-[1.2] active:scale-[0.98] transition-all duration-300" >Resume</div>
+    </div>
+     
+   </div>
+   
   );
+}
+
+
+function SplitedText({word, className}:{word:string, className?: string}){
+    return(
+      <div className="flex">
+      {word.split("").map((char,idx)=>{
+        return <motion.div 
+        style={{fontWeight: 400}}
+          key={idx+char} 
+          className={className+ " cuties"}
+          initial={{ scale: 1 }}
+          whileHover={{ scaleY: 1.2, scaleX: 1.3, fontWeight: "700", letterSpacing: "0.1em" }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        >
+          {char}
+        </motion.div>
+      })}
+      </div>
+    )
 }
