@@ -43,7 +43,7 @@ export default function Nav({width,height,strokeWidth}:{width:string,height:stri
 function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeWidth:string}){
 
     const [scope, animate] = useAnimate();
-    const [open, setOpen] = useState();
+    const [open, setOpen] = useState(false);
     const [active,setActive] = useState(false);
     const animationRef = useRef<AnimationPlaybackControlsWithThen|null>(null);
     const path = usePathname();
