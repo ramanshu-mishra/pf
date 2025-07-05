@@ -129,7 +129,7 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
         >
             <motion.div className="" >
                 
-                <AnimatePresence mode="wait">
+                <AnimatePresence >
                    {
   open && (
     <motion.div
