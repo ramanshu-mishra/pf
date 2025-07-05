@@ -62,7 +62,7 @@ useEffect(() => {
   return (
       <OuterContent>
 
-         <div ref={scope} className="min-h-[95%] w-[95vw]  flex flex-col  justify-center items-center " style={{userSelect: "none"}} >
+         <div ref={scope} className="min-h-[95%] w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} >
      
      {/* code for custom pointer */}
       <motion.span className="w-8 h-8 bg-transparent rounded-full fixed z-[998]  outer-pointer " style={{
