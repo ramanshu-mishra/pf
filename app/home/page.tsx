@@ -21,12 +21,19 @@ useEffect(() => {
   const handleGlobalMouseMove = (e: MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
   };
+  const handleGlobalTouchMove = (e: TouchEvent) => {
+    if (e.touches && e.touches.length > 0) {
+      setMousePosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    }
+  };
 
   window.addEventListener("mousemove", handleGlobalMouseMove);
+  window.addEventListener("touchmove", handleGlobalTouchMove);
   document.addEventListener("click", handleClick);
 
   return () => {
     window.removeEventListener("mousemove", handleGlobalMouseMove);
+    window.removeEventListener("touchmove", handleGlobalTouchMove);
     document.removeEventListener("click", handleClick);
   };
 }, []);
