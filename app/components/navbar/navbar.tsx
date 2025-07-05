@@ -48,7 +48,6 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
     const [scope, animate] = useAnimate();
     const [open, setOpen] = useState(false);
     const [active,setActive] = useState(false);
-    const [showContent, setShowContent] = useState(false);
     const animationRef = useRef<AnimationPlaybackControlsWithThen|null>(null);
     const path = usePathname();
 
@@ -114,13 +113,6 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
 
     
 
-    useEffect(()=>{
-        if(open)
-        setTimeout(()=>setShowContent(true), 1000);
-        else{
-            setShowContent(false);
-        }
-    }, [open])
 
     useEffect(()=>{
         if(active)handleActive();
