@@ -48,6 +48,7 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
     const [scope, animate] = useAnimate();
     const [open, setOpen] = useState(false);
     const [active,setActive] = useState(false);
+    const [touchHoveredIdx, setTouchHoveredIdx] = useState<number|null>(null);
     const animationRef = useRef<AnimationPlaybackControlsWithThen|null>(null);
     const path = usePathname();
 
@@ -142,11 +143,18 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
         <div className="flex flex-col gap-5 justify-center items-center flex-1">
         {   
                         content.map((tab,idx)=>{
-                            return <motion.div style={{y: -5, x:10, opacity: 0 }} className=" text-2xl relative tabs flex gap-2 items-center justify-start" key={idx}
+                            const isTouchHovered = touchHoveredIdx === idx;
+                            return <motion.div 
+                            style={{y: -5, x:10, opacity: 0 }} 
+                            className="text-2xl relative tabs flex gap-2 items-center justify-start" 
+                            key={idx}
                             variants={smallchildVariant}
                             whileHover={{scale: 1.1}}
+                            animate={isTouchHovered ? {scale: 1.1} : {}}
                             transition={{duration: 0.3}}
-                          
+                            onTouchStart={() => setTouchHoveredIdx(idx)}
+                            onTouchEnd={() => setTouchHoveredIdx(null)}
+                            onTouchCancel={() => setTouchHoveredIdx(null)}
                             
                             
                             >

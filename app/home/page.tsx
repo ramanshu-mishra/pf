@@ -12,6 +12,9 @@ export default function Home() {
 
   const [scope,animate]  = useAnimate();
   const [mousePosition, setMousePosition] = useState<{x:number,y:number}>({x:-5, y:-5});
+  const [connectHovered, setConnectHovered] = useState(false);
+  const [aboutHovered, setAboutHovered] = useState(false);
+
   function FadingName(){
     animate(".cuties",
       {opacity: [0,1], filter: ["blur(10px)", "blur(0px)"]},
@@ -123,13 +126,30 @@ useEffect(() => {
 
 
       <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 items-center md:translate-y-5 lg:translate-y-15 w-full justify-center mb-3" >
-      <motion.div className="max-w-[15rem] w-[15rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 h-12 shadow-cardShadow"
-      style={{fontSize: "100%", backgroundColor: "var(--color-neutral-100)", fontWeight: 500}}
+      <motion.div className="max-w-[15rem] w-[15rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow"
+      style={{
+              fontSize: connectHovered ? "120%" : "100%",
+              backgroundColor: connectHovered ? "var(--color-neutral-700)" : "var(--color-neutral-100)",
+              fontWeight: connectHovered ? "bold" : 500,
+              letterSpacing: connectHovered ? "0.2rem" : undefined,
+            }}
       whileHover={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold",letterSpacing: "0.2rem"}}
+        onTouchStart={() => setConnectHovered(true)}
+            onTouchEnd={() => setConnectHovered(false)}
+            onTouchCancel={() => setConnectHovered(false)}
       >Connect</motion.div>
-      <motion.div className="max-w-[15rem] w-[15rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 h-12 shadow-cardShadow"
-       style={{fontSize: "100%", backgroundColor: "var(--color-neutral-100)" , fontWeight: 500}}
+      <motion.div className="max-w-[15rem] w-[15rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow"
+       style={{
+              fontSize: aboutHovered ? "120%" : "100%",
+              backgroundColor: aboutHovered ? "var(--color-neutral-700)" : "var(--color-neutral-100)",
+              fontWeight: aboutHovered ? "bold" : 500,
+              letterSpacing: aboutHovered ? "0.2rem" : undefined,
+            }}
       whileHover={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
+      whileTap={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
+        onTouchStart={() => setAboutHovered(true)}
+            onTouchEnd={() => setAboutHovered(false)}
+            onTouchCancel={() => setAboutHovered(false)}
       >About</motion.div>
     </div>
     </div>
