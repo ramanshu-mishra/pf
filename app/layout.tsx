@@ -23,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+       <title></title>
       <body
         className={`${inter.variable} min-h-screen h-screen antialiased flex flex-col justify-center items-center `}
       >

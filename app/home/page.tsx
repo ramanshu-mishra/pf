@@ -1,5 +1,6 @@
 "use client"
 import Image from "next/image";
+import Head from "next/head";
 import {useAnimate, motion, stagger} from "motion/react"
 import profile from "../assets/protfolio-image.png"
 import React, { useEffect, useState } from "react";
@@ -71,6 +72,14 @@ useEffect(() => {
   },[])
   return (
       <OuterContent>
+        <Head>
+        <title>RamSpace:Porfolio Ramanshu Sharan Mishra</title>
+        <meta name="description" content="Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer and Undergraduate Student at NIT-Jalandhar" />
+        <meta property="og:title" content="RamSpace: Portfolio Ramanshu Sharan Mishra" />
+        <meta property="og:description" content="Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer and Undergraduate Student at NIT-Jalandhar" />
+        <meta property="og:image" content= "../assets/protfolio-image.png" />
+        {/* <meta name="robots" content="index, follow" /> */}
+        </Head>
 
          <div ref={scope} className="min-h-[95%] w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} >
      
