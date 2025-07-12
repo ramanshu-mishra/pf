@@ -1,20 +1,30 @@
 "use client"
 import Image from "next/image";
 import Head from "next/head";
-import {useAnimate, motion, stagger} from "motion/react"
+import {useAnimate, motion, stagger, useMotionValue, useSpring} from "motion/react"
 import profile from "../assets/protfolio-image.png"
 import React, { useEffect, useState } from "react";
+import Card from "../card";
+import { useAboutHover, useConnectStore, useMousePosition } from "../store";
+
 // import Navbar from "../components/navbar/navbar"
 import OuterContent from "../components/outerContent/outerContent"
 
+
 import SplitedText from "../components/SplittedText/SplittedText";
 
-export default function Home() {
+
+
+
+export default  function Home() {
 
   const [scope,animate]  = useAnimate();
-  const [mousePosition, setMousePosition] = useState<{x:number,y:number}>({x:-5, y:-5});
-  const [connectHovered, setConnectHovered] = useState(false);
-  const [aboutHovered, setAboutHovered] = useState(false);
+  const connectHovered = useConnectStore(state=>state.conenctHover);
+  const aboutHovered = useAboutHover(state=>state.aboutHover);
+  const setConnectHovered = useConnectStore(state=>state.setConnectHover);
+  const setAboutHovered = useAboutHover(state=>state.setAboutHover);
+  const mousePosition = useMousePosition((state) => state.mousePosition);
+  const updateMousePosition = useMousePosition((state) => state.updatePosition);
 
   function FadingName(){
     animate(".cuties",
@@ -23,11 +33,11 @@ export default function Home() {
   }
 useEffect(() => {
   const handleGlobalMouseMove = (e: MouseEvent) => {
-    setMousePosition({ x: e.clientX, y: e.clientY });
+    updateMousePosition({x:e.clientX, y:e.clientY});
   };
   const handleGlobalTouchMove = (e: TouchEvent) => {
     if (e.touches && e.touches.length > 0) {
-      setMousePosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+      updateMousePosition({x:e.touches[0].clientX, y:e.touches[0].clientY})
     }
   };
 
@@ -63,7 +73,17 @@ useEffect(() => {
     )
   }
 
-  
+  // const smoothX = useSpring(mouseX, {stiffness: 300, damping: 30, duration: 0.2});
+  // const smoothY = useSpring(mouseY, {stiffness: 300, damping: 30, duration: 0.2});
+  // const smoothX2 = useSpring(mouseX, {stiffness: 300, damping: 30, duration: 0.});
+  // const smoothY2 = useSpring(mouseY, {stiffness: 300, damping: 30, duration: 0.2});
+
+
+
+
+ const [hover, setHover] = useState(false);
+    
+
 
   useEffect(()=>{
     FadingName()
@@ -81,7 +101,13 @@ useEffect(() => {
         {/* <meta name="robots" content="index, follow" /> */}
         </Head>
 
-         <div ref={scope} className="min-h-[95%] w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} >
+         <div ref={scope} className="min-h-[95%] w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} 
+          onMouseEnter={()=>setHover(true)}
+        onMouseLeave = {()=>{setHover(false)}}
+        onMouseMove={()=>{
+            if(hover==false)setHover(true);
+        }}
+         >
      
      {/* code for custom pointer */}
       <motion.span className="w-8 h-8 bg-transparent rounded-full fixed z-[998]  outer-pointer " style={{
@@ -93,7 +119,7 @@ useEffect(() => {
       animate={{x: mousePosition.x - 20, y: mousePosition.y-20}} transition={{type: "spring" , stiffness: 300, damping: 30 ,duration: 0.2}}>
         
       </motion.span>
-      <motion.span className="w-5 h-5 bg-white rounded-full fixed z-[999] " style={{
+      <motion.span className="w-5 h-5 dark:bg-white bg-black rounded-full fixed z-[999] " style={{
         left: 0,
         top: 0,
         position: "fixed",
@@ -102,7 +128,7 @@ useEffect(() => {
       animate={{x: mousePosition.x - 12, y: mousePosition.y-12}} transition={{type: "spring" , stiffness: 300, damping: 30 ,duration: 0.2}}>
         
       </motion.span>
-       <motion.span className="w-2 h-2 bg-white rounded-full fixed z-[1000]  mix-blend-difference " style={{
+       <motion.span className="w-2 h-2 bg-white  rounded-full fixed z-[1000]  mix-blend-difference " style={{
         left: 0,
         top: 0,
         position: "fixed",
@@ -120,9 +146,14 @@ useEffect(() => {
     <div className="flex flex-col h-full w-full flex-1 gap-6 items-center justify-center ">
 
       {/* code for image and name */}
-      <div className="flex items-center flex-col relative w-full " >
-        <Image className=" mt-2 rounded-full hover:scale-[1.02] active:scale-[0.98] transition-scale duration-300 p-4 w-[300] md:w-[380] md:translate-y-5 lg:translate-y-0 sm:w-[380] sm:translate-y-1" width={0} src={profile} alt="profile" onClick={FadingName}></Image>
-      <div className=" text-4xl flex-wrap flex lg:absolute lg:text-8xl  sm:text-6xl md:text-7xl bottom-2 justify-center md:w-full md:gap-6  " >
+      <div className="flex items-center flex-col relative w-full  " >
+        <motion.div layoutId="profile-image" onClick={FadingName}>
+            {/* <Image  width={0}
+            className=" {` shadow-cardShadow mt-2 border-solid dark:border-0  border-neutral-400 rounded-full hover:scale-[1.02] active:scale-[0.98] transition-scale duration-300  w-[300] md:w-[380] md:translate-y-5 lg:translate-y-0  sm:w-[380] overflow-hidden sm:translate-y-1 relative `}" src={profile} alt="profile" ></Image> */}
+            <Card hover={hover} cords={mousePosition}></Card>
+        </motion.div>
+        
+      <div className=" text-4xl flex-wrap flex lg:absolute lg:text-8xl  sm:text-6xl md:text-7xl bottom-2 justify-center md:w-full md:gap-6 " >
       <SplitedText word={"Ramanshu"} className="m-1 cuties "></SplitedText>
       <SplitedText word={"Sharan"} className="m-1 cuties "></SplitedText>
       <SplitedText word={"Mishra"} className="m-1 cuties "></SplitedText>
@@ -131,18 +162,18 @@ useEffect(() => {
 
       {/* code for image and name --done */}
        
-      <div className="text-center text-xl font-bold italic"> I am someone who is trying to build something</div>
+      <motion.div layoutId="loader-text" className="text-center text-xl font-bold italic text-neutral-700 dark:text-neutral-50"> I am someone who is trying to build something</motion.div>
 
 
       <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 items-center md:translate-y-5 lg:translate-y-15 w-full justify-center mb-3" >
       <motion.div className="max-w-[15rem] w-[15rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow"
       style={{
-              fontSize: connectHovered ? "120%" : "100%",
+              fontSize: connectHovered ? "1.2rem" : "1rem",
               backgroundColor: connectHovered ? "var(--color-neutral-700)" : "var(--color-neutral-100)",
               fontWeight: connectHovered ? "bold" : 500,
-              letterSpacing: connectHovered ? "0.2rem" : undefined,
+              letterSpacing: connectHovered ? "0.2rem" : "0rem",
             }}
-      whileHover={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold",letterSpacing: "0.2rem"}}
+      whileHover={{fontSize: "1.2rem", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold",letterSpacing: "0.2rem"}}
         onTouchStart={() => setConnectHovered(true)}
             onTouchEnd={() => setConnectHovered(false)}
             onTouchCancel={() => setConnectHovered(false)}
@@ -152,7 +183,7 @@ useEffect(() => {
               fontSize: aboutHovered ? "120%" : "100%",
               backgroundColor: aboutHovered ? "var(--color-neutral-700)" : "var(--color-neutral-100)",
               fontWeight: aboutHovered ? "bold" : 500,
-              letterSpacing: aboutHovered ? "0.2rem" : undefined,
+              letterSpacing: aboutHovered ? "0.2rem" : "0rem",
             }}
       whileHover={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
       whileTap={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}

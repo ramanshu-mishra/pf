@@ -1,12 +1,26 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter , Poppins, Jockey_One} from "next/font/google";
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/next';
+
+
 
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"]
+})
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  style: "normal",
+  subsets: ["latin"]
+})
+const Jockey = Jockey_One({
+  variable: "--font-jockey",
+  weight: "400",
+  display: "auto",
+  subsets : ["latin"]
 })
 
 
@@ -20,18 +34,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+
+  
+return (
     <html lang="en">
        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
        <title></title>
       <body
-        className={`${inter.variable} min-h-screen h-screen antialiased flex flex-col justify-center items-center `}
+        className={`${poppins.variable} ${inter.variable} ${Jockey.variable} min-h-screen h-auto overflow-y-auto antialiased flex flex-col justify-center items-center min-w-[10rem] overflow-auto `}
       >
-        
+       
           {children}
         <Analytics></Analytics>
         
       </body>
     </html>
   );
+
 }

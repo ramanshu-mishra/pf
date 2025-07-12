@@ -4,8 +4,7 @@ import { AnimatePresence, AnimationPlaybackControlsWithThen, motion, stagger, us
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { IconBrandGithub, IconBrandTwitter } from "@tabler/icons-react";
-import Image from "next/image";
-import linkedIn from "../../assets/linkedIn.svg"
+import LinkedIn from "../../assets/linkedIn"
 
 
 
@@ -134,7 +133,7 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
   open && (
     <motion.div
       key={"nav1"}
-      className="fixed inset-0 z-[200] backdrop-blur-lg shadow-cardShadow sm:hidden flex flex-col  items-center w-screen min-w-screen min-h-0 overflow-y-auto justify-between"
+      className="fixed inset-0 z-[200] dark:bg-transparent bg-neutral-200 backdrop-blur-3xl dark:backdrop-blur-lg shadow-cardShadow sm:hidden flex flex-col  items-center w-screen min-w-screen min-h-0 overflow-y-auto justify-between"
     
         variants={smallNavParent}
         transition={{duration: 0.3}}
@@ -146,7 +145,7 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                             const isTouchHovered = touchHoveredIdx === idx;
                             return <motion.div 
                             style={{y: -5, x:10, opacity: 0 }} 
-                            className="text-2xl relative tabs flex gap-2 items-center justify-start" 
+                            className="text-2xl relative tabs flex gap-2 items-center justify-start font-poppins" 
                             key={idx}
                             variants={smallchildVariant}
                             whileHover={{scale: 1.1}}
@@ -158,7 +157,7 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                             
                             
                             >
-                                 <motion.span className={` z-50 h-[8px] w-[8px] bg-white rounded-full absolute -left-4 ${!(path==tab.link) && "hidden"}`}
+                                 <motion.span className={` z-50 h-[8px] w-[8px] dark:bg-white bg-black rounded-full absolute -left-4 ${!(path==tab.link) && "hidden"}`}
                                  initial={{opacity:0, y:-1000}}
                                  animate={{opacity:1, y:0}}
                                  transition={{type:"spring", stiffness: 300, damping: 20}}
@@ -170,10 +169,12 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
 
 
        <div className="mb-6 flex justify-around items-center w-fit bottom-6 inset-x-0 mx-auto gap-8 ">
-      <IconBrandGithub className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300"></IconBrandGithub>
-      <IconBrandTwitter className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300"></IconBrandTwitter>
-      <Image src={linkedIn} className="text-neutral-50 hover:scale-[1.3] active:scale-[0.98] transition-all duration-300" alt="linkedIn"></Image>
-      <div className="font-bold hover:scale-[1.2] active:scale-[0.98] transition-all duration-300" >Resume</div>
+     <a target="_black" href="https://github.com/ramanshu-mishra"><IconBrandGithub className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300" /></a>
+                    <a target="_black" href="https://x.com/RamanshuSharan"><IconBrandTwitter className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300" /></a>
+                    <a target="_black" href="https://www.linkedin.com/in/ramanshu-sharan-mishra-29905627b/"> 
+                    <LinkedIn classes="text-black dark:text-neutral-50"></LinkedIn>
+                    </a>
+                    <a target="_blank" download={"/Resume_Ramanshu_Sharan_Mishra.pdf"} href={"/Resume_Ramanshu_Sharan_Mishra.pdf"}><div className="font-bold hover:scale-[1.2] active:scale-[0.98] transition-all duration-300">Resume</div></a>
     </div>
     </motion.div>
   )
@@ -186,7 +187,7 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                 >
                      {
                         content.map((tab,idx)=>{
-                            return <motion.div style={{y: -5, x:10, opacity: 0 }} className="relative tabs flex gap-2 items-center justify-start" key={idx}
+                            return <motion.div style={{y: -5, x:10, opacity: 0 }} className="relative tabs font-poppins flex gap-2 items-center justify-start" key={idx}
                             variants={childVariant}
                             whileHover={{scale: 1.1}}
                             transition={{duration: 0.3}}
@@ -194,7 +195,7 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                             
                             
                             >
-                                 <motion.span className={`h-[5px] w-[5px] bg-white rounded-full absolute -left-3 ${!(path==tab.link) && "hidden"}`}
+                                 <motion.span className={`h-[5px] w-[5px] dark:bg-white bg-black rounded-full absolute -left-3 ${!(path==tab.link) && "hidden"}`}
                                  initial={{opacity:0, y:-1000}}
                                  animate={{opacity:1, y:0}}
                                  transition={{type:"spring", stiffness: 300, damping: 20}}
@@ -207,9 +208,9 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
             </motion.div>
             
             <motion.div  className="group z-[950] flex flex-col gap-2 active:scale-[0.95] transition-scale duration-300" style={{width, height}} onMouseEnter={()=>setActive(true)} onMouseLeave={()=>setActive(false)} onClick={()=>{setOpen(e=>!e)}}>
-  <motion.div className={`rounded-full w-full bg-white  dot shadow-cardShadow`} style={{height:strokeWidth }}></motion.div>
-  <motion.div className={`rounded-full w-full bg-white  dot shadow-cardShadow`} style={{height:strokeWidth }}></motion.div>
-  <motion.div className={`rounded-full w-full bg-white  dot shadow-cardShadow`} style={{height:strokeWidth }}></motion.div>
+  <motion.div className={`rounded-full bg-black w-full dark:bg-white  dot shadow-cardShadow`} style={{height:strokeWidth }}></motion.div>
+  <motion.div className={`rounded-full bg-black w-full dark:bg-white  dot shadow-cardShadow`} style={{height:strokeWidth }}></motion.div>
+  <motion.div className={`rounded-full w-full bg-black dark:bg-white  dot shadow-cardShadow`} style={{height:strokeWidth }}></motion.div>
 </motion.div>
         </motion.div>
   

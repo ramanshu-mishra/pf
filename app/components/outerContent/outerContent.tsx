@@ -2,8 +2,10 @@
 import Navbar from "../navbar/navbar"
 import SplitedText from "../SplittedText/SplittedText"
 import {IconBrandGithub, IconBrandTwitter} from "@tabler/icons-react"
-import linkedIn from "../../assets/linkedIn.svg"
-import Image from "next/image"
+import LinkedIn from "../../assets/linkedIn"
+
+
+
 export default function Page({children}:{children:React.ReactNode}) {
     return (
         <div className="min-h-screen w-full relative flex flex-col justify-between items-center overflow-y-auto">
@@ -28,10 +30,12 @@ export default function Page({children}:{children:React.ReactNode}) {
                     <SplitedText word={"Man"} className="" />
                 </div>
                 <div className="hidden  sm:flex justify-around items-center gap-6 mt-4 sm:mt-0">
-                    <IconBrandGithub className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300" />
-                    <IconBrandTwitter className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300" />
-                    <Image src={linkedIn} className="text-neutral-50 hover:scale-[1.3] active:scale-[0.98] transition-all duration-300" alt="linkedIn" />
-                    <div className="font-bold hover:scale-[1.2] active:scale-[0.98] transition-all duration-300">Resume</div>
+                    <a target="_black" href="https://github.com/ramanshu-mishra"><IconBrandGithub className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300" /></a>
+                    <a target="_black" href="https://x.com/RamanshuSharan"><IconBrandTwitter className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300" /></a>
+                    <a target="_black" href="https://www.linkedin.com/in/ramanshu-sharan-mishra-29905627b/"> 
+                    <LinkedIn classes="text-black dark:text-neutral-50"></LinkedIn>
+                    </a>
+                    <a target="_blank" download={"/Resume_Ramanshu_Sharan_Mishra.pdf"} href={"/Resume_Ramanshu_Sharan_Mishra.pdf"}><div className="font-bold hover:scale-[1.2] active:scale-[0.98] transition-all duration-300">Resume</div></a>
                 </div>
             </footer>
         </div>
