@@ -129,7 +129,7 @@ export const LoaderFour = ({className ,text = "Loading..." }: { className?: stri
     <div className={`relative font-bold text-black [perspective:1000px] dark:text-white ${className}`}>
       <motion.span
         animate={{
-          skew: [0, -40, 0],
+        //   skew: [0, -40, 0],
           scaleX: [1, 2, 1],
         }}
         transition={{
