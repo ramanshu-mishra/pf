@@ -1,3 +1,7 @@
+import OuterContent from "../components/outerContent/outerContent"
+
 export default function Projects(){
-    return 
+    return (
+        <OuterContent className></OuterContent>
+    )
 }

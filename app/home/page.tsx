@@ -1,9 +1,9 @@
 "use client"
 import Image from "next/image";
 import Head from "next/head";
-import {useAnimate, motion, stagger, useMotionValue, useSpring} from "motion/react"
+import {useAnimate, motion, stagger, useMotionValue, useSpring, useScroll, MotionValue, useMotionValueEvent} from "motion/react"
 import profile from "../assets/protfolio-image.png"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Card from "../card";
 import { useAboutHover, useConnectStore, useMousePosition } from "../store";
 
@@ -15,8 +15,75 @@ import SplitedText from "../components/SplittedText/SplittedText";
 
 
 
+import Projects from "../projects/projects";
 
-export default  function Home() {
+const pages: React.ReactNode[] = [<Home key={1}></Home>, <Projects key={2}></Projects>];
+
+
+
+export default  function Page(){
+  const containerRef = useRef<HTMLDivElement|null>(null);
+  const {scrollYProgress} = useScroll({
+    container: containerRef,
+  });
+  const [num, setNum] = useState(0);
+  const [pos,setPos] = useState(0);
+  
+  useEffect(()=>{
+
+    function handleScroll(){
+const scrollTop = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const docHeight = containerRef.current.offsetHeight;
+console.log(scrollTop)
+  if (scrollTop + windowHeight >= docHeight && pos != 1) {
+    console.log("window-height: "+ windowHeight);
+    console.log("scrollTop: "+ scrollTop);
+    console.log("current pos (windowHeight+scrollTop): "+ (scrollTop+windowHeight));
+    console.log("doc-height"+ docHeight);
+    setPos(1);
+    console.log("✅ You've reached the bottom of the page!");
+  }
+  else if(scrollTop ==0 && pos != -1){
+    setPos(-1);
+    console.log("top of the page");
+  }
+  else if(pos != 0){
+    setPos(0);
+  }
+
+  }
+
+    window.addEventListener('scroll', handleScroll);
+    return ()=>window.removeEventListener("scroll", handleScroll);
+  })
+  
+  useEffect(()=>{
+   function handleScroll(e: WheelEvent){
+    if(e.deltaY > 1 && pos == 1){
+      console.log("user scrolled down");
+    }
+    else if(e.deltaY < 1 && pos == -1){
+      console.log("user scrolled up");
+    }
+   }
+
+   window.addEventListener("wheel", (e)=>handleScroll(e));
+   return ()=>window.removeEventListener("wheel", (e)=>handleScroll(e));
+  }, []);
+
+  return (
+      <div ref={containerRef} className="bg-red-400 overflow-y-auto"> 
+        {pages[num]}
+      </div>
+        
+      
+    )  
+  
+}
+
+
+ function Home() {
 
   const [scope,animate]  = useAnimate();
   const connectHovered = useConnectStore(state=>state.conenctHover);
@@ -101,7 +168,7 @@ useEffect(() => {
         {/* <meta name="robots" content="index, follow" /> */}
         </Head>
 
-         <div ref={scope} className="min-h-[95%] w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} 
+         <div ref={scope} className=" flex-1 w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} 
           onMouseEnter={()=>setHover(true)}
         onMouseLeave = {()=>{setHover(false)}}
         onMouseMove={()=>{

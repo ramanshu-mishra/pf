@@ -6,7 +6,7 @@ import LinkedIn from "../../assets/linkedIn"
 
 
 
-export default function Page({children}:{children:React.ReactNode}) {
+export default function Page({className, children}:{className: string, children:React.ReactNode}) {
     return (
         <div className="min-h-screen w-full relative flex flex-col justify-between items-center overflow-y-auto">
             <div className="w-full mt-6 flex flex-row justify-between items-center px-4 z-[950] gap-4">

@@ -21,7 +21,7 @@ export default function Card({cords,hover}: {cords: {x:number,y:number}, hover:b
       } 
     },[]);
 
-    console.log(theme);
+    // console.log(theme);
     
 
     useEffect(()=>{
