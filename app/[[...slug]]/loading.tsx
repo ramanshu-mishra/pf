@@ -2,8 +2,8 @@
 
 import {motion} from "motion/react";
 import { useState } from "react";
-import Card from "./card"
-import { LoaderFour } from "./components/loader";
+import Card from "../card"
+import { LoaderFour } from "../components/loader";
 export default function Page(){
    
     const [hover, setHover] = useState(false);
