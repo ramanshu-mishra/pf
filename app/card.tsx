@@ -1,7 +1,7 @@
 "use client";
 
 
-
+import {motion} from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
 import { CardBody, CardContainer} from "./card2";  
 import profile from "./assets/protfolio-image.png"
@@ -38,10 +38,10 @@ export default function Card({cords,hover}: {cords: {x:number,y:number}, hover:b
       <CardBody className={``} >
 
         
-          <div ref={ref} className=" p-[1.5px] "
+          <motion.div ref={ref} className=" p-[1.8px] "
         
         
-        style = {hover && theme === "dark" ? { background: `radial-gradient(circle at ${relcord.x}px ${relcord.y}px, #fff, #000)` } : hover && theme !="dark"? {background: `radial-gradient(circle at ${relcord.x}px ${relcord.y}px, #000, #fff)`}: {background: ""} }
+        animate = { theme === "dark" ? { background: `radial-gradient(circle at ${relcord.x}px ${relcord.y}px, #fff, #000)` } :  theme !="dark"? {background: `radial-gradient(circle at ${relcord.x}px ${relcord.y}px, #000, #fff)`}: {background: ""} }
         >
             <div>
               <Image  width={0}
@@ -49,7 +49,7 @@ export default function Card({cords,hover}: {cords: {x:number,y:number}, hover:b
            
             </div>
 
-        </div>
+        </motion.div>
         
         
         
