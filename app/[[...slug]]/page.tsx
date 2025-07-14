@@ -1,7 +1,6 @@
 "use client"
 // import Image from "next/image";
 import debounce from "lodash/debounce"
-import Head from "next/head";
 import {useAnimate, motion, stagger,  AnimatePresence} from "motion/react"
 // import profile from "../assets/protfolio-image.png"
 import React, { useEffect, useRef, useState } from "react";
