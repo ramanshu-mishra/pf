@@ -61,7 +61,9 @@ export default  function Page(){
   return (
    <AnimatePresence >
     <OuterContent background={pageColors[num[0]+num[1]]} num={num[0]}>
-      <motion.div ref={containerRef} className=" w-full h-full flex flex-1 items-center ">
+      <motion.div ref={containerRef} className=" w-full h-full flex flex-1 items-center "
+      style={{userSelect: "none"}}
+      >
         <AnimatePresence mode="wait">
           {pages.map((comp, i) => {
             if (i === num[0])
@@ -106,15 +108,6 @@ export default  function Page(){
   }
 
 
-  
-  // const smoothX = useSpring(mouseX, {stiffness: 300, damping: 30, duration: 0.2});
-  // const smoothY = useSpring(mouseY, {stiffness: 300, damping: 30, duration: 0.2});
-  // const smoothX2 = useSpring(mouseX, {stiffness: 300, damping: 30, duration: 0.});
-  // const smoothY2 = useSpring(mouseY, {stiffness: 300, damping: 30, duration: 0.2});
-
-
-
-
  const [hover, setHover] = useState(false);
     
 
@@ -127,10 +120,11 @@ export default  function Page(){
     
       <motion.div
       layoutId="page"
+      className="  h-full"
       >
         
 
-         <div ref={scope} className=" flex-1 w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} 
+         <div ref={scope} className=" flex-1  w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} 
           onMouseEnter={()=>setHover(true)}
         onMouseLeave = {()=>{setHover(false)}}
         onMouseMove={()=>{
@@ -138,7 +132,7 @@ export default  function Page(){
         }}
          >
    {/* main content code */}
-    <div className="flex flex-col h-full w-full flex-1 gap-6 items-center justify-center ">
+    <div className="flex flex-col h-full w-full flex-1 gap-6 items-center justify-center  ">
 
       {/* code for image and name */}
       <div className="flex items-center flex-col relative w-full  " >

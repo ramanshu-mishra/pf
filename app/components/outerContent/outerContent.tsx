@@ -38,6 +38,7 @@ export default function Page({className, children, background, num}:{className?:
     useEffect(() => {
   const handleGlobalMouseMove = (e: MouseEvent) => {
     updateMousePosition({x:e.clientX, y:e.clientY});
+    // console.log(mousePosition.x);
   };
   const handleGlobalTouchMove = (e: TouchEvent) => {
     if (e.touches && e.touches.length > 0) {
@@ -60,7 +61,7 @@ export default function Page({className, children, background, num}:{className?:
     return (
         <motion.div ref={scope} className="min-h-screen w-full h-full relative flex flex-col justify-between items-center "
         animate={{backgroundColor: background}}
-        // style={{backgroundColor: "green"}}
+        style={{userSelect: "none"}}
         >
           <AnimatePresence mode="wait">
             {titles[num] && (
