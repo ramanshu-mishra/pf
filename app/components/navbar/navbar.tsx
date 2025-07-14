@@ -150,15 +150,16 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                             onTouchStart={() => setTouchHoveredIdx(idx)}
                             onTouchEnd={() => setTouchHoveredIdx(null)}
                             onTouchCancel={() => setTouchHoveredIdx(null)}
-                            
+                            onClick={()=>setNum([idx,0])}
                             
                             >
                                  <motion.span className={` z-50 h-[8px] w-[8px] dark:bg-white bg-black rounded-full absolute -left-4 ${!(num[0]==idx) && "hidden"}`}
                                  initial={{opacity:0, y:-1000}}
                                  animate={{opacity:1, y:0}}
                                  transition={{type:"spring", stiffness: 300, damping: 20}}
-                                 onClick={()=>{setOpen(false); setNum([idx,0])}}
+                                 onClick={()=>{setOpen(false); }}
                                  layoutId="bubble"
+                                 
                                  >
                                     </motion.span>   {tab.title}
                             </motion.div>
