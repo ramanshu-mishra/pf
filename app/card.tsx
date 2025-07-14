@@ -34,7 +34,7 @@ export default function Card({cords,hover}: {cords: {x:number,y:number}, hover:b
 
   return (
 
-    <CardContainer className="inter-var shadow-cardShadow mt-2 border-solid dark:border-0  border-neutral-400 rounded-full hover:scale-[1.02] active:scale-[0.98] transition-scale duration-300  w-[300] md:w-[380] md:translate-y-5 lg:translate-y-0  sm:w-[380] overflow-hidden sm:translate-y-1 relative">
+    <CardContainer className="inter-var shadow-cardShadow mt-2 border-solid dark:border-0  border-neutral-400 rounded-full  hover:scale-[1.02] lg:hover:scale-[1.12] active:scale-[0.98] transition-scale duration-300  w-[300] md:w-[380] md:translate-y-5 lg:translate-y-0  sm:w-[380] overflow-hidden sm:translate-y-1 relative lg:scale-110">
       <CardBody className={``} >
 
         
