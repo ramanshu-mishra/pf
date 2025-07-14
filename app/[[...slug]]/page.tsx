@@ -132,11 +132,13 @@ export default  function Page(){
         }}
          >
    {/* main content code */}
-    <div className="flex flex-col h-full w-full flex-1 gap-6 items-center justify-center  ">
+    <div className="flex flex-col h-full w-full flex-1 gap-6 items-center justify-center   ">
 
       {/* code for image and name */}
-      <div className="flex items-center flex-col relative w-full  " >
-        <motion.div layoutId="profile-image" onClick={FadingName}>
+      <div className="flex items-center flex-col relative w-full  h-full  " >
+        <motion.div layoutId="profile-image" onClick={FadingName}
+        className="relative"
+        >
             {/* <Image  width={0}
             className=" {` shadow-cardShadow mt-2 border-solid dark:border-0  border-neutral-400 rounded-full hover:scale-[1.02] active:scale-[0.98] transition-scale duration-300  w-[300] md:w-[380] md:translate-y-5 lg:translate-y-0  sm:w-[380] overflow-hidden sm:translate-y-1 relative `}" src={profile} alt="profile" ></Image> */}
             <Card hover={hover} cords={mousePosition}></Card>
@@ -154,20 +156,21 @@ export default  function Page(){
       <motion.div layoutId="loader-text" className="text-center text-xl font-bold italic text-neutral-700 dark:text-neutral-50"> I am someone who is trying to build something</motion.div>
 
 
-      <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 items-center md:translate-y-5 lg:translate-y-15 w-full justify-center mb-3" >
-      <motion.div className="max-w-[15rem] w-[15rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow"
-      style={{
-              fontSize: connectHovered ? "1.2rem" : "1rem",
+      <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 items-center md:translate-y-0 lg:translate-y-15 w-full justify-center  " >
+      <motion.div className="max-w-[18rem] w-[18rem] md:w-[18rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow"
+     style={{
+              fontSize: connectHovered ? "120%" : "100%",
               backgroundColor: connectHovered ? "var(--color-neutral-700)" : "var(--color-neutral-100)",
               fontWeight: connectHovered ? "bold" : 500,
               letterSpacing: connectHovered ? "0.2rem" : "0rem",
             }}
-      whileHover={{fontSize: "1.2rem", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold",letterSpacing: "0.2rem"}}
+      whileHover={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
+      whileTap={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
         onTouchStart={() => setConnectHovered(true)}
             onTouchEnd={() => setConnectHovered(false)}
             onTouchCancel={() => setConnectHovered(false)}
       >Connect</motion.div>
-      <motion.div className="max-w-[15rem] w-[15rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow"
+      <motion.div className="max-w-[18rem] w-[18rem] md:w-[18rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow"
        style={{
               fontSize: aboutHovered ? "120%" : "100%",
               backgroundColor: aboutHovered ? "var(--color-neutral-700)" : "var(--color-neutral-100)",

@@ -104,7 +104,7 @@ export default function Main(){
             <motion.div ref={scope} layoutId="page" className=" flex flex-1 h-full flex-col ">
 
                 {/* code for the project shocase block */}
-                    <motion.div  className={cn(` w-[30%] h-70 sm:w-153 sm:h-80 md:h-100 md:w-192  relative left-19 lg:w-240 lg:h-125 rounded-3xl p-4` )}
+                    <motion.div  className={cn(` w-[30%] h-70 sm:w-153 sm:h-80 md:h-100 md:w-192  relative left-19 lg:w-240 lg:h-130 rounded-3xl p-4` )}
                     style={{backgroundColor: bgColorMap[projects[num[1]].bg]["900"]}}
                     initial={{y:0, opacity: 0}}
                     animate={{y:0, opacity: 1}}
