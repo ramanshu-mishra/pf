@@ -1,11 +1,12 @@
 "use client"
-import Image from "next/image";
+// import Image from "next/image";
+import debounce from "lodash/debounce"
 import Head from "next/head";
-import {useAnimate, motion, stagger, useMotionValue, useSpring, useScroll, MotionValue, useMotionValueEvent} from "motion/react"
-import profile from "../assets/protfolio-image.png"
+import {useAnimate, motion, stagger,  AnimatePresence} from "motion/react"
+// import profile from "../assets/protfolio-image.png"
 import React, { useEffect, useRef, useState } from "react";
 import Card from "../card";
-import { useAboutHover, useConnectStore, useMousePosition } from "../store";
+import { useAboutHover, useConnectStore, useMousePosition, windowStore } from "../store";
 
 // import Navbar from "../components/navbar/navbar"
 import OuterContent from "../components/outerContent/outerContent"
@@ -17,65 +18,72 @@ import SplitedText from "../components/SplittedText/SplittedText";
 
 import Projects from "../projects/projects";
 
-const pages: React.ReactNode[] = [<Home key={1}></Home>, <Projects key={2}></Projects>];
-
+const pages: React.ReactNode[] = [<Home key={1}></Home>, <Projects key={2} ></Projects>];
+const pageColors: string[]=["#0a0a0a","#172554", "#3b0764"];
+const windowSizes: number[] = [1,2];
 
 
 export default  function Page(){
   const containerRef = useRef<HTMLDivElement|null>(null);
-  const {scrollYProgress} = useScroll({
-    container: containerRef,
-  });
-  const [num, setNum] = useState(0);
-  const [pos,setPos] = useState(0);
+ 
+  const num = windowStore(state=>state.indices);
+  const setNum = windowStore(state=>state.setIndices);
+
   
-  useEffect(()=>{
-
-    function handleScroll(){
-const scrollTop = window.scrollY;
-  const windowHeight = window.innerHeight;
-  const docHeight = containerRef.current.offsetHeight;
-console.log(scrollTop)
-  if (scrollTop + windowHeight >= docHeight && pos != 1) {
-    console.log("window-height: "+ windowHeight);
-    console.log("scrollTop: "+ scrollTop);
-    console.log("current pos (windowHeight+scrollTop): "+ (scrollTop+windowHeight));
-    console.log("doc-height"+ docHeight);
-    setPos(1);
-    console.log("✅ You've reached the bottom of the page!");
-  }
-  else if(scrollTop ==0 && pos != -1){
-    setPos(-1);
-    console.log("top of the page");
-  }
-  else if(pos != 0){
-    setPos(0);
-  }
-
-  }
-
-    window.addEventListener('scroll', handleScroll);
-    return ()=>window.removeEventListener("scroll", handleScroll);
-  })
-  
-  useEffect(()=>{
-   function handleScroll(e: WheelEvent){
-    if(e.deltaY > 1 && pos == 1){
-      console.log("user scrolled down");
+  useEffect(() => {
+    
+  const handleScroll =  debounce((e: WheelEvent)=>{
+    const w = num[0];
+    const sw = num[1];
+    if (e.deltaY > 0 && num[0] + 1 < pages.length && num[1] == windowSizes[num[0]]-1) {
+      // scroll down
+      setNum([w+1,0]);
+    } else if (e.deltaY < 0 && num[0] - 1 >= 0 && num[1]== 0 ) {
+      // scroll up
+      setNum([w-1,windowSizes[w-1]-1]);
     }
-    else if(e.deltaY < 1 && pos == -1){
-      console.log("user scrolled up");
+    else if(e.deltaY > 0 && num[1] < windowSizes[num[0]]-1){
+      setNum([w,sw+1]);
     }
-   }
+    else if(e.deltaY < 0 && num[1] > 0){
+      setNum([w,sw-1]);
+    }
+  }, 150);
 
-   window.addEventListener("wheel", (e)=>handleScroll(e));
-   return ()=>window.removeEventListener("wheel", (e)=>handleScroll(e));
-  }, []);
+  window.addEventListener("wheel", handleScroll);
 
+  return () => {
+    window.removeEventListener("wheel", handleScroll);
+  };
+}, [num]);
+
+
+  console.log("pagelength: "+ pages.length);
   return (
-      <div ref={containerRef} className="bg-red-400 overflow-y-auto"> 
-        {pages[num]}
-      </div>
+   <AnimatePresence >
+    <OuterContent background={pageColors[num[0]+num[1]]} num={num[0]}>
+      <motion.div ref={containerRef} className=" w-full h-full flex flex-1 items-center ">
+        <AnimatePresence mode="wait">
+          {pages.map((comp, i) => {
+            if (i === num[0])
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ y: 0, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 20, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="h-full w-full flex flex-col flex-1  "
+                  // style={{ flexBasis: 0 }}
+                >
+                  {comp}
+                </motion.div>
+              );
+          })}
+        </AnimatePresence>
+      </motion.div>
+      </OuterContent>
+      </AnimatePresence>
         
       
     )  
@@ -84,62 +92,22 @@ console.log(scrollTop)
 
 
  function Home() {
-
   const [scope,animate]  = useAnimate();
   const connectHovered = useConnectStore(state=>state.conenctHover);
   const aboutHovered = useAboutHover(state=>state.aboutHover);
   const setConnectHovered = useConnectStore(state=>state.setConnectHover);
   const setAboutHovered = useAboutHover(state=>state.setAboutHover);
   const mousePosition = useMousePosition((state) => state.mousePosition);
-  const updateMousePosition = useMousePosition((state) => state.updatePosition);
+  
 
   function FadingName(){
     animate(".cuties",
       {opacity: [0,1], filter: ["blur(10px)", "blur(0px)"]},
       {delay: stagger(0.05)})
   }
-useEffect(() => {
-  const handleGlobalMouseMove = (e: MouseEvent) => {
-    updateMousePosition({x:e.clientX, y:e.clientY});
-  };
-  const handleGlobalTouchMove = (e: TouchEvent) => {
-    if (e.touches && e.touches.length > 0) {
-      updateMousePosition({x:e.touches[0].clientX, y:e.touches[0].clientY})
-    }
-  };
 
-  window.addEventListener("mousemove", handleGlobalMouseMove);
-  window.addEventListener("touchmove", handleGlobalTouchMove);
-  document.addEventListener("click", handleClick);
 
-  return () => {
-    window.removeEventListener("mousemove", handleGlobalMouseMove);
-    window.removeEventListener("touchmove", handleGlobalTouchMove);
-    document.removeEventListener("click", handleClick);
-  };
-}, []);
-
-  async function handleClick(){
-   await animate(".outer-pointer", 
-      {
-        backgroundColor: ["#f8fafc"],
-        opacity: [1, 0],
-        scale: [1, 4]
-      },
-    {
-      duration:  0.5
-    })
-    animate(".outer-pointer", 
-      {
-        scale: 1,
-        zIndex: 2
-      },
-      {
-        duration: 0
-      }
-    )
-  }
-
+  
   // const smoothX = useSpring(mouseX, {stiffness: 300, damping: 30, duration: 0.2});
   // const smoothY = useSpring(mouseY, {stiffness: 300, damping: 30, duration: 0.2});
   // const smoothX2 = useSpring(mouseX, {stiffness: 300, damping: 30, duration: 0.});
@@ -154,19 +122,14 @@ useEffect(() => {
 
   useEffect(()=>{
     FadingName()
-   document.addEventListener("click", handleClick);
-   return ()=>document.removeEventListener("click", handleClick);
-  },[])
+  },[]);
+
   return (
-      <OuterContent>
-        <Head>
-        <title>RamSpace:Porfolio Ramanshu Sharan Mishra</title>
-        <meta name="description" content="Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer and Undergraduate Student at NIT-Jalandhar" />
-        <meta property="og:title" content="RamSpace: Portfolio Ramanshu Sharan Mishra" />
-        <meta property="og:description" content="Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer and Undergraduate Student at NIT-Jalandhar" />
-        <meta property="og:image" content= "../assets/protfolio-image.png" />
-        {/* <meta name="robots" content="index, follow" /> */}
-        </Head>
+    
+      <motion.div
+      layoutId="page"
+      >
+        
 
          <div ref={scope} className=" flex-1 w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} 
           onMouseEnter={()=>setHover(true)}
@@ -175,40 +138,6 @@ useEffect(() => {
             if(hover==false)setHover(true);
         }}
          >
-     
-     {/* code for custom pointer */}
-      <motion.span className="w-8 h-8 bg-transparent rounded-full fixed z-[998]  outer-pointer " style={{
-        left: 0,
-        top: 0,
-        position: "fixed",
-        pointerEvents: "none"
-      }}
-      animate={{x: mousePosition.x - 20, y: mousePosition.y-20}} transition={{type: "spring" , stiffness: 300, damping: 30 ,duration: 0.2}}>
-        
-      </motion.span>
-      <motion.span className="w-5 h-5 dark:bg-white bg-black rounded-full fixed z-[999] " style={{
-        left: 0,
-        top: 0,
-        position: "fixed",
-        pointerEvents: "none"
-      }}
-      animate={{x: mousePosition.x - 12, y: mousePosition.y-12}} transition={{type: "spring" , stiffness: 300, damping: 30 ,duration: 0.2}}>
-        
-      </motion.span>
-       <motion.span className="w-2 h-2 bg-white  rounded-full fixed z-[1000]  mix-blend-difference " style={{
-        left: 0,
-        top: 0,
-        position: "fixed",
-        pointerEvents: "none"
-      }}
-      animate={{x: mousePosition.x - 6, y: mousePosition.y-6}} transition={{type: "spring", duration: 0.15}}>
-        
-      </motion.span>
-      {/* code for costom pointer --- done */}
-      
-      
-      
-      
    {/* main content code */}
     <div className="flex flex-col h-full w-full flex-1 gap-6 items-center justify-center ">
 
@@ -269,7 +198,7 @@ useEffect(() => {
    </div>
 
 
-      </OuterContent>
+      </motion.div>
    
    
   );

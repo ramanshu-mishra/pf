@@ -5,29 +5,24 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { IconBrandGithub, IconBrandTwitter } from "@tabler/icons-react";
 import LinkedIn from "../../assets/linkedIn"
-
+import { windowStore } from "@/app/store";
 
 
 const content = [
     {
         title: "Home",
-        link: "/home"
     },
     {
         title: "Projects",
-        link: "/projects"
     },
     {
         title: "About",
-        link: "/about"
     },
     {
         title: "Blogs",
-        link: "/blog"
     },
     {
         title: "Contact",
-        link: "/contact"
     }
 ]
 
@@ -49,7 +44,8 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
     const [active,setActive] = useState(false);
     const [touchHoveredIdx, setTouchHoveredIdx] = useState<number|null>(null);
     const animationRef = useRef<AnimationPlaybackControlsWithThen|null>(null);
-    const path = usePathname();
+    const num = windowStore(state=>state.indices);
+    const setNum = windowStore(state=>state.setIndices);
 
 
     const smallNavParent = {
@@ -157,12 +153,14 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                             
                             
                             >
-                                 <motion.span className={` z-50 h-[8px] w-[8px] dark:bg-white bg-black rounded-full absolute -left-4 ${!(path==tab.link) && "hidden"}`}
+                                 <motion.span className={` z-50 h-[8px] w-[8px] dark:bg-white bg-black rounded-full absolute -left-4 ${!(num[0]==idx) && "hidden"}`}
                                  initial={{opacity:0, y:-1000}}
                                  animate={{opacity:1, y:0}}
                                  transition={{type:"spring", stiffness: 300, damping: 20}}
+                                 onClick={()=>{setOpen(false); setNum([idx,0])}}
+                                 layoutId="bubble"
                                  >
-                                    </motion.span>   <Link onClick={()=>setOpen(false)} href={tab.link}>{tab.title}</Link>
+                                    </motion.span>   {tab.title}
                             </motion.div>
                         })
                     }</div>
@@ -191,15 +189,15 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                             variants={childVariant}
                             whileHover={{scale: 1.1}}
                             transition={{duration: 0.3}}
-                          
+                            onClick={()=>setNum([idx, 0])}
                             
                             
                             >
-                                 <motion.span className={`h-[5px] w-[5px] dark:bg-white bg-black rounded-full absolute -left-3 ${!(path==tab.link) && "hidden"}`}
+                                 <motion.span className={`h-[5px] w-[5px] dark:bg-white bg-black rounded-full absolute -left-3 ${!(num[0]==idx) && "hidden"}`}
                                  initial={{opacity:0, y:-1000}}
                                  animate={{opacity:1, y:0}}
                                  transition={{type:"spring", stiffness: 300, damping: 20}}
-                                 ></motion.span>   <Link href={tab.link}>{tab.title}</Link>
+                                 ></motion.span > {tab.title}
                             </motion.div>
                         })
                     }
