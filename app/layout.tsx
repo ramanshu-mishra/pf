@@ -41,7 +41,7 @@ return (
        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
        <title></title>
       <body
-        className={`${poppins.variable} ${inter.variable} ${Jockey.variable} min-h-screen h-auto overflow-y-auto antialiased flex flex-col justify-center items-center min-w-[10rem] overflow-auto `}
+        className={`${poppins.variable} ${inter.variable} ${Jockey.variable} min-h-screen h-auto overflow-y-auto antialiased flex flex-col justify-center items-center min-w-[10rem]  `}
       >
        
           {children}

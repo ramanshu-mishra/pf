@@ -49,3 +49,13 @@ export const useAboutHover = create<AboutHover>((set)=>({
     aboutHover: false,
     setAboutHover: (val)=>set({aboutHover:val})
 }));
+
+type WindowStore={
+  indices: number[],
+  setIndices: (x:number[])=>void
+}
+
+export const windowStore = create<WindowStore>((set)=>({
+  indices : [0,0],
+  setIndices : (val)=>set({indices: val})
+}))
