@@ -111,7 +111,27 @@ export default function Main(){
                     transition={{duration: 0.5}}
                     exit={{y:100, opacity: 0}}
                     >
-                        <div className={`absolute flex flex-col -right-[27%] w-97 h-85 rounded-3xl my-auto inset-y-0`}
+                        <ProjectImageBlock num={num}></ProjectImageBlock>
+                        {/* code for project Image */}
+                        <ProjectDescriptionBlock num={num}></ProjectDescriptionBlock>
+                        {/* end of code for project Image */}
+                    </motion.div>
+                     {/* code for project shocase block end */}
+
+                    {/* code for arrow button */}
+                    <ProjectNavigationButton num={num} setNum={setNum}></ProjectNavigationButton>
+                    {/* code for arrow button end */}
+                    
+                   
+            </motion.div>
+        
+    )
+}
+
+
+function ProjectImageBlock({num}:{num:number[]}){
+  return (
+    <div className={`absolute flex flex-col -right-[27%] w-97 h-85 rounded-3xl my-auto inset-y-0`}
                         style={{backgroundColor: bgColorMap[projects[num[1]].bg]["900"]}}
                         >
                             <div className={`h-full w-full  z-5 absolute rounded-3xl right-0.5 translate-y-0.5`}
@@ -162,8 +182,12 @@ export default function Main(){
                             </div>
                             
                         </div>
-                        {/* code for project Image */}
-                        <div className={`rounded-3xl  relative h-full w-full overflow-hidden`}
+  )
+}
+
+function ProjectDescriptionBlock({num}:{num:number[]}){
+  return (
+    <div className={`rounded-3xl  relative h-full w-full overflow-hidden`}
                          style={{backgroundColor: bgColorMap[projects[num[1]].bg]["400"]}}
                         >
                             <div className="absolute h-full w-full z-0 ">
@@ -204,12 +228,12 @@ export default function Main(){
                             ></motion.div>
                             {/* end of code for transition animation*/}
                         </div>
-                        {/* end of code for project Image */}
-                    </motion.div>
-                     {/* code for project shocase block end */}
+  )
+}
 
-                    {/* code for arrow button */}
-                    <motion.div className="  mb-6 flex justify-center z-[1047] relative items-center -bottom-17 w-fit inset-x-0 mx-auto h-10  "
+function ProjectNavigationButton({num,setNum}:{num:number[], setNum: (x:number[])=>void}){
+  return (
+    <motion.div className="  mb-6 flex justify-center z-[1047] relative items-center -bottom-17 w-fit inset-x-0 mx-auto h-10  "
                     initial={{y:0}}
                     animate={{y:0}}
                     >
@@ -239,10 +263,5 @@ export default function Main(){
                             </div>
                              
                     </motion.div>
-                    {/* code for arrow button end */}
-                    
-                   
-            </motion.div>
-        
-    )
+  )
 }
