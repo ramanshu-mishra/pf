@@ -237,6 +237,15 @@ function ProjectNavigationButton({
                 ? bgColorMap[projects[num[1]].bg]["900/50"]
                 : bgColorMap[projects[num[1]].bg]["800"],
           }}
+           whileHover={{
+            backgroundColor:
+              num[1] == 0
+                ? bgColorMap[projects[num[1]].bg]["900/50"]
+                : bgColorMap[projects[num[1]].bg]["400"],
+          }}
+           whileTap={{backgroundColor: num[1] == projects.length - 1
+                ? bgColorMap[projects[num[1]].bg]["900/50"]
+                : bgColorMap[projects[num[1]].bg]["400"],}}      
           onClick={() => {
             if (num[1] > 0) setNum([num[0], num[1] - 1]);
           }}
@@ -249,9 +258,9 @@ function ProjectNavigationButton({
           return (
             <motion.div
               key={i}
-              animate={{ width: i === num[1] ? "20px" : "12px" }}
+              animate={{ width: i === num[1] ? "30px" : "12px" }}
               transition={{ duration: 0.3 }}
-              className="h-3 w-3 rounded-full bg-white/50"
+              className=" h-2 w-8 rounded-full bg-white/50"
             ></motion.div>
           );
         })}
@@ -264,6 +273,12 @@ function ProjectNavigationButton({
                 ? bgColorMap[projects[num[1]].bg]["900/50"]
                 : bgColorMap[projects[num[1]].bg]["800"],
           }}
+          whileHover={{backgroundColor: num[1] == projects.length - 1
+                ? bgColorMap[projects[num[1]].bg]["900/50"]
+                : bgColorMap[projects[num[1]].bg]["400"],}}
+          whileTap={{backgroundColor: num[1] == projects.length - 1
+                ? bgColorMap[projects[num[1]].bg]["900/50"]
+                : bgColorMap[projects[num[1]].bg]["400"],}}      
           onClick={() => {
             if (num[1] < projects.length - 1) setNum([num[0], num[1] + 1]);
           }}
