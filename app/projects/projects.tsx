@@ -150,7 +150,7 @@ function ProjectImageBlock({ num }: { num: number[] }) {
   return (
     <div
       className={`relative lg:inset-y-0 lg:my-auto flex flex-col rounded-3xl
-  min-w-80 w-[90%] h-fit
+  min-w-80 w-full h-fit
   sm:w-120 sm:min-w-120  sm:h-66 sm:min-h-66
   md:h-68 md:min-h-68 md:min-w-120 md:w-120
   lg:right-25 lg:h-78 lg:min-h-78 lg:w-90 lg:min-w-90
