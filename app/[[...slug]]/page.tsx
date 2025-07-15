@@ -61,7 +61,7 @@ export default  function Page(){
   return (
    <AnimatePresence >
     <OuterContent background={pageColors[num[0]+num[1]]} num={num[0]}>
-      <motion.div ref={containerRef} className=" w-full h-full flex flex-1 items-center "
+      <motion.div ref={containerRef} className=" w-full h-full flex flex-1 items-center  "
       style={{userSelect: "none"}}
       >
         <AnimatePresence mode="wait">
@@ -120,11 +120,11 @@ export default  function Page(){
     
       <motion.div
       layoutId="page"
-      className="  h-full"
+      className="  h-full flex-1 basis-0  flex items-center justify-center"
       >
         
 
-         <div ref={scope} className=" flex-1  w-[95vw] my-4 mx-auto flex flex-col  justify-center items-center " style={{userSelect: "none"}} 
+         <div ref={scope} className=" flex-1 w-[95vw] my-4 mx-auto flex flex-col basis-0  justify-center items-center " style={{userSelect: "none"}} 
           onMouseEnter={()=>setHover(true)}
         onMouseLeave = {()=>{setHover(false)}}
         onMouseMove={()=>{
@@ -132,7 +132,7 @@ export default  function Page(){
         }}
          >
    {/* main content code */}
-    <div className="flex flex-col h-full w-full flex-1 gap-6 items-center justify-center   ">
+    <div className="flex flex-col h-full w-full flex-1 gap-6 items-center  justify-center   ">
 
       {/* code for image and name */}
       <div className="flex items-center flex-col relative w-full  h-full  " >
@@ -156,8 +156,8 @@ export default  function Page(){
       <motion.div layoutId="loader-text" className="text-center text-xl font-bold italic text-neutral-700 dark:text-neutral-50"> I am someone who is trying to build something</motion.div>
 
 
-      <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 items-center md:translate-y-0 lg:translate-y-15 w-full justify-center  " >
-      <motion.div className="max-w-[18rem] w-[18rem] md:w-[18rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow"
+      <div className="flex flex-1 basis-0 flex-col sm:flex-row  gap-5 sm:gap-10 items-center md:translate-y-0 lg:translate-y-15 w-full justify-center  " >
+      <motion.div className="max-w-[18rem] w-[18rem] md:w-[18rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow "
      style={{
               fontSize: connectHovered ? "120%" : "100%",
               backgroundColor: connectHovered ? "var(--color-neutral-700)" : "var(--color-neutral-100)",
