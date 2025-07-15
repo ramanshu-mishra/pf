@@ -59,7 +59,7 @@ export default function Page({className, children, background, num}:{className?:
 }, []);
 
     return (
-        <motion.div ref={scope} className="min-h-screen w-full h-full relative flex flex-col justify-between items-center "
+        <motion.div ref={scope} className="fixed inset-0 w-screen h-screen flex flex-col justify-between items-center overflow-hidden" 
         animate={{backgroundColor: background}}
         style={{userSelect: "none"}}
         >
@@ -116,7 +116,7 @@ export default function Page({className, children, background, num}:{className?:
                   </motion.span>
                   {/* code for costom pointer --- done */}
 
-            <div className="w-full mt-8 flex flex-row justify-between items-center px-8 z-[950] gap-4">
+            <div className="w-full mt-8 mb-2 flex flex-row justify-between items-center px-8 z-[950] gap-4">
                 <div className="text-2xl md:text-3xl flex gap-2 items-center">
                     <SplitedText word={"Ramanshu"} className="" />
                     <SplitedText word={"Sharan"} className="hidden sm:inline" />
@@ -125,11 +125,11 @@ export default function Page({className, children, background, num}:{className?:
                 <Navbar width={"3rem"} height="2.5rem" strokeWidth="5px" />
             </div>
 
-            <main className="flex-1 w-full flex flex-col justify-center items-center px-2 sm:px-8 h-full">
+            <main className="flex-1 w-full min-w-0 min-h-0 flex flex-col justify-center items-center px-2 sm:px-8 h-full ">
                 {children}
             </main>
 
-            <footer className="w-full flex flex-row justify-start sm:justify-between items-end px-8  relative pb-8 z-[950] gap-4">
+            <footer className="w-full min-w-0 min-h-0 flex flex-row justify-start sm:justify-between items-end px-8  relative pb-8 z-[950] gap-4">
                 <div className="text-2xl md:text-3xl flex gap-2">
                     <SplitedText word={"Also"} className="" />
                     <SplitedText word={"I'm"} className="" />
