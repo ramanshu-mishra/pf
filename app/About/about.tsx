@@ -1,8 +1,8 @@
 "use client"
-import {animate, motion, useAnimate} from "motion/react";
-import { useEffect } from "react";
-import { windowStore } from "../store";
-import { bgColorMap,devTools,projects, skills } from "../projects/projectConfig";
+import {motion} from "motion/react";
+// import { useEffect } from "react";
+// import { windowStore } from "../store";
+import { devTools, skills } from "../projects/projectConfig";
 import SplitedText from "../components/SplittedText/SplittedText";
 import Tag from "../components/tag";
 
@@ -13,7 +13,7 @@ export default function Page(){
     y: 0,
     filter: "blur(0px)",
     transition: {
-      type: "spring",
+      type: "spring" as const,
       damping: 40,         // Increased for smoother motion
       stiffness: 180,      // Decreased for less abrupt movement
       staggerChildren: 0.1, // Increased for more gradual staggering
@@ -29,7 +29,7 @@ const itemVariants = {
     y: 0,
     filter: "blur(0px)",
     transition: {
-      type: "spring",
+      type: "spring" as const,
       damping: 18,         // Increased for smoother motion
       stiffness: 180,      // Decreased for less abrupt movement
     },
