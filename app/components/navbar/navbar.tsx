@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { IconBrandGithub, IconBrandTwitter } from "@tabler/icons-react";
 import LinkedIn from "../../assets/linkedIn"
 import { windowStore } from "@/app/store";
+import { projects } from "@/app/projects/projectConfig";
+
 
 
 const content = [
@@ -19,12 +21,10 @@ const content = [
         title: "About",
     },
     {
-        title: "Blogs",
-    },
-    {
         title: "Contact",
     }
 ]
+
 
 export default function Nav({width,height,strokeWidth}:{width:string,height:string,strokeWidth:string}){
 
@@ -141,7 +141,7 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                             const isTouchHovered = touchHoveredIdx === idx;
                             return <motion.div 
                             style={{y: -5, x:10, opacity: 0 }} 
-                            className="text-2xl relative tabs flex gap-2 items-center justify-start font-poppins" 
+                            className="text-2xl relative tabs flex-col gap-2 items-center justify-start font-poppins" 
                             key={idx}
                             variants={smallchildVariant}
                             whileHover={{scale: 1.1}}
@@ -160,7 +160,25 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                                  layoutId="bubble"
                                  
                                  >
-                                    </motion.span>   {tab.title}
+                                    </motion.span>   <motion.div className="flex flex-col items-center">
+                                    <div>{tab.title}</div>
+                                    <div className="flex gap-2">
+                                        
+                                        {num[0]==1 && 
+                                        <AnimatePresence>
+                                        {projects.map((p,i)=>{
+                                            return <motion.div key={i} className=" h-1 rounded-full bg-white/50"
+                                            style={idx != 1 ? {display: "none"}:{width: "1rem"}}
+                                            animate={i==num[1] ? {width: "2rem", backgroundColor: "white"}:{width: "1rem" , backgroundColor: "#a3a3a3"}}
+                                            
+                                            ></motion.div>
+                                        })}
+                                        </AnimatePresence>
+                                        }
+                                        
+                                    </div>
+
+                                 </motion.div>
                             </motion.div>
                         })
                     }</div>
@@ -197,8 +215,28 @@ function NavIcon({width,height,strokeWidth}:{width:string, height:string,strokeW
                                  initial={{opacity:0, y:-1000}}
                                  animate={{opacity:1, y:0}}
                                  transition={{type:"spring", stiffness: 300, damping: 20}}
-                                 ></motion.span > {tab.title}
+                                 ></motion.span > 
+                                 <motion.div className="flex flex-col items-center">
+                                    <div>{tab.title}</div>
+                                    <div className="flex gap-2">
+                                        
+                                        {num[0]==1 && 
+                                        <AnimatePresence>
+                                        {projects.map((p,i)=>{
+                                            return <motion.div key={i} className=" h-1 rounded-full bg-white/50"
+                                            style={idx != 1 ? {display: "none"}:{width: "0.5rem"}}
+                                            animate={i==num[1] ? {width: "2rem", backgroundColor: "white"}:{width: "1rem" , backgroundColor: "#a3a3a3"}}
+                                            
+                                            ></motion.div>
+                                        })}
+                                        </AnimatePresence>
+                                        }
+                                        
+                                    </div>
+
+                                 </motion.div>
                             </motion.div>
+
                         })
                     }
                 </motion.div>}
