@@ -1,81 +1,15 @@
 // import OuterContent from "../components/outerContent/outerContent"
-import { AnimatePresence, motion, useAnimate } from "motion/react";
+import { motion, useAnimate } from "motion/react";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import cryptoTracker from "../assets/projectImages/cryptoTracker.png";
-import recall from "../assets/projectImages/recall.png";
+import React, { useEffect } from "react";
+
+
 import Tag from "../components/tag";
 import { cn } from "../lib/utils";
 import debounce from "lodash/debounce";
 import { windowStore } from "../store";
-
-interface projectInterface {
-  title: string;
-  type: string;
-  description: string;
-  tags: string[];
-  image: React.ReactNode;
-  bg: string;
-}
-
-const projects: projectInterface[] = [
-  {
-    title: "Recall",
-    type: "Bookmarking and note-taking while you browse",
-    description:
-      "An intelligent web companion that lets you bookmark and take notes on the go, organized effortlessly with tags and autofetched images while you browse.",
-    tags: ["React.js", "TypeScript", "TailwindCSS", "Express.js", "MongoDB"],
-    image: (
-      <Image
-        alt={"ram"}
-        width={0}
-        src={recall}
-        className="h-full w-full"
-      ></Image>
-    ),
-    bg: "blue",
-  },
-  {
-    title: "Crypto Price Tracker",
-    type: "A simple platform to get price and volume updates for Crypto Currencies",
-    description:
-      "A simple API wrapper for price and Volume changes of top performing crypto currencies and with filter support",
-    tags: ["React.js", "TypeScript", "TailwindCSS"],
-    image: (
-      <Image
-        alt={"ram"}
-        width={0}
-        src={cryptoTracker}
-        className="h-full w-full"
-      ></Image>
-    ),
-    bg: "violet",
-  },
-];
-
-const bgColorMap = {
-  blue: {
-    "950": "#172554",
-    "900": "#1e3a8a",
-    "800": "#1e40af",
-    "400": "#60a5fa",
-    "200": "#bfdbfe",
-    "100": "#dbeafe",
-    "50": "#eff6ff",
-    "900/50": "rgba(30, 58, 138, 0.5)",
-  },
-  violet: {
-    "950": "#3b0764",
-    "900": "#581c87",
-    "800": "#6b21a8",
-    "400": "#a78bfa",
-    "200": "#e9d5ff",
-    "100": "#f3e8ff",
-    "50": "#faf5ff",
-    "900/50": "rgba(88, 28, 135, 0.5)",
-  },
-};
+import Link from "next/link";
+import { bgColorMap, projects } from "./projectConfig";
 
 export default function Main() {
   const num = windowStore((state) => state.indices);
@@ -87,6 +21,9 @@ export default function Main() {
     animate(".ct2", { scaleX: [0, 1, 0] }, { duration: 0.6, delay: 0.4 });
     animate(".ct3", { scaleX: [0, 1, 0] }, { duration: 0.6, delay: 0.5 });
   }
+
+ 
+ 
 
   useEffect(() => {
     TriggerAnimation();
@@ -115,7 +52,7 @@ export default function Main() {
     <motion.div
       ref={scope}
       layoutId="page"
-      className="flex h-full w-full flex-1 flex-col items-center justify-center "
+      className=" relative flex h-full w-full flex-1 flex-col items-center justify-center  "
     >
       {/* code for the project shocase block */}
       <motion.div
@@ -125,9 +62,10 @@ export default function Main() {
         transition={{ duration: 0.5 }}
         exit={{ y: 100, opacity: 0 }}
       >
+        
         <div
           className={cn(
-            `relative aspect-5/3 w-full min-w-80 rounded-3xl p-2 lg:p-4 md:w-[90%] md:min-w-[90%] lg:h-110 lg:min-h-110 lg:w-180 lg:min-w-180 xl:h-125 xl:min-h-125 xl:w-210 xl:min-w-210 2xl:h-135 2xl:min-h-135 2xl:w-250 2xl:min-w-250`,
+            `relative aspect-5/3 w-full min-w-80 rounded-3xl p-2 lg:p-4 md:w-[90%] md:min-w-[90%] lg:h-110 lg:min-h-110 lg:w-180 lg:min-w-180 xl:h-125 xl:min-h-125 xl:w-210 xl:min-w-210 2xl:h-130 2xl:min-h-130 2xl:w-250 2xl:min-w-250  `,
           )}
           style={{ backgroundColor: bgColorMap[projects[num[1]].bg]["900"] }}
         >
@@ -135,7 +73,10 @@ export default function Main() {
         </div>
 
         <ProjectImageBlock num={num}></ProjectImageBlock>
+
       </motion.div>
+       
+      
       <div>
         <ProjectNavigationButton
           num={num}
@@ -193,7 +134,8 @@ function ProjectDescriptionBlock({ num }: { num: number[] }) {
       <div className="absolute z-0 h-full w-full bg-amber-400 object-cover">
         {projects[num[1]].image}
       </div>
-      <motion.div className="absolute bottom-3 z-5 flex h-auto w-full justify-center">
+      <motion.div className="absolute bottom-3 z-5 flex  h-auto w-full justify-center">
+        
         <motion.div
           className="flex h-8 sm:h-12 md:h-15 w-[90%]  lg:w-[74%] items-center justify-center rounded-full bg-white text-lg font-semibold"
           style={{ color: bgColorMap[projects[num[1]].bg][900] }}
@@ -204,8 +146,9 @@ function ProjectDescriptionBlock({ num }: { num: number[] }) {
             fontSize: 1.1,
           }}
         >
-          Visit
+          <Link href={projects[num[1]].link} target="_black" className="h-full w-full flex justify-center items-center">Visit</Link>
         </motion.div>
+       
       </motion.div>
 
       {/* code for transition animation */}

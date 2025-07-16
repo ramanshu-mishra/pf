@@ -4,14 +4,35 @@ import SplitedText from "../SplittedText/SplittedText"
 import {IconBrandGithub, IconBrandTwitter} from "@tabler/icons-react"
 import LinkedIn from "../../assets/linkedIn"
 import {AnimatePresence, motion,  useAnimate, useMotionTemplate, useMotionValue} from "motion/react";
-import { useMousePosition } from "../../store"
+import { useMousePosition, windowStore } from "../../store"
 import { useEffect } from "react"
 import Head from "next/head"
+import { pageColors,PageColorMap} from "../../projects/projectConfig"
 
-const titles = ["", "Projects"];
+const titles = ["", "Projects", "About", "Connect"];
 
 export default function Page({className, children, background, num}:{className?: string, children:React.ReactNode, background: string, num:number}) {
     const [scope,animate]  = useAnimate();
+        const nm = windowStore(store=>store.indices);
+    
+         function TriggerSlider() {
+  const currentTheme = PageColorMap[pageColors[nm[0]]?.[nm[1]]] ?? PageColorMap["neutral"];
+  
+  const gradients = [
+    `radial-gradient(circle at 50% 0%, ${currentTheme["900"]}, ${currentTheme["100"]})`,
+    `radial-gradient(circle at 50% 0%, ${currentTheme["900"]}, ${currentTheme["400"]})`,
+    `radial-gradient(circle at 50% 100%, ${currentTheme["900"]}, ${currentTheme["100"]})`,
+    `radial-gradient(circle at 50% 100%, white, white)`
+  ];
+
+  animate(".slider", { background: gradients }, { duration: 1 });
+}
+         
+        
+          useEffect(() => {
+            
+            TriggerSlider();
+          }, [nm]);
     async function handleClick(){
        await animate(".outer-pointer", 
           {
@@ -59,7 +80,7 @@ export default function Page({className, children, background, num}:{className?:
 }, []);
 
     return (
-        <motion.div ref={scope} className="fixed inset-0 w-screen h-screen flex flex-col justify-between items-center overflow-hidden" 
+        <motion.div ref={scope} className="fixed inset-0 w-screen h-screen flex flex-col justify-between items-center overflow-y-auto" 
         animate={{backgroundColor: background}}
         style={{userSelect: "none"}}
         >
@@ -67,7 +88,7 @@ export default function Page({className, children, background, num}:{className?:
             {titles[num] && (
               <motion.div
                 key={num}
-                className="w-fit absolute right-0 text-5xl my-auto inset-y-0 h-fit font-semibold"
+                className="w-fit absolute right-4 text-5xl my-auto inset-y-0 h-fit font-semibold"
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -116,7 +137,7 @@ export default function Page({className, children, background, num}:{className?:
                   </motion.span>
                   {/* code for costom pointer --- done */}
 
-            <div className="w-full mt-8 mb-2 flex flex-row justify-between items-center px-8 z-[950] gap-4">
+            <div className="max-sm:mt-6  w-full mt-8 mb-2 flex flex-row justify-between items-center px-8 z-[950] gap-4">
                 <div className="text-2xl md:text-3xl flex gap-2 items-center">
                     <SplitedText word={"Ramanshu"} className="" />
                     <SplitedText word={"Sharan"} className="hidden sm:inline" />
@@ -125,11 +146,21 @@ export default function Page({className, children, background, num}:{className?:
                 <Navbar width={"3rem"} height="2.5rem" strokeWidth="5px" />
             </div>
 
-            <main className="flex-1 w-full min-w-0 min-h-0 flex flex-col justify-center items-center px-2 sm:px-8 h-full ">
+<div className="flex w-full h-full ">
+  <motion.div  className=" max-sl:hidden shadow-md w-2 h-[30%] left-4 inset-y-0 my-auto absolute rounded-full overflow-hidden slider "
+  animate={{ height: `calc(30% - ${4 * nm[0]}%)` }}
+
+  >
+            <div className=" h-full w-full rounded-full slider "></div>
+
+        </motion.div>
+  <main className="flex-1 w-full min-w-0  min-h-0 flex flex-col justify-center items-center px-2 sm:px-8 h-full ">
                 {children}
             </main>
+</div>
+            
 
-            <footer className="w-full min-w-0 min-h-0 flex flex-row justify-start sm:justify-between items-end px-8  relative pb-8 z-[950] gap-4">
+            <footer className="w-full  min-w-0 min-h-0 flex flex-row justify-start sm:justify-between items-end px-8  relative max-sm:pb-6 mt-2 pb-8 z-[950] gap-4">
                 <div className="text-2xl md:text-3xl flex gap-2">
                     <SplitedText word={"Also"} className="" />
                     <SplitedText word={"I'm"} className="" />

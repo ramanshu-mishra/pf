@@ -13,27 +13,36 @@ import OuterContent from "../components/outerContent/outerContent"
 
 import SplitedText from "../components/SplittedText/SplittedText";
 
-
-
 import Projects from "../projects/projects";
+import About from "../About/about";
+import Contact from "../Contact/contact";
 
-const pages: React.ReactNode[] = [<Home key={1}></Home>, <Projects key={2} ></Projects>];
-const pageColors: string[]=["#0a0a0a","#172554", "#3b0764"];
-const windowSizes: number[] = [1,2];
-
+const pages: React.ReactNode[] = [<Home key={1}></Home>, <Projects key={2} ></Projects>, <About key={3}></About>, <Contact key={4}></Contact>];
+import { pageColors,PageColorMap,windowSizes} from "../projects/projectConfig"
 
 export default  function Page(){
   const containerRef = useRef<HTMLDivElement|null>(null);
  
   const num = windowStore(state=>state.indices);
   const setNum = windowStore(state=>state.setIndices);
+  const scrolling = useRef(false);
 
   
   useEffect(() => {
     
   const handleScroll =  debounce((e: WheelEvent)=>{
+    if(scrolling.current)return;
+    scrolling.current = true;
+    const ret =  setTimeout(()=>{
+      scrolling.current = false;
+    }, 150);
+    console.log(num);
     const w = num[0];
     const sw = num[1];
+
+    if(num[1] < 0){setNum([0,0]); return;}
+    if (num[1] >= windowSizes.length){setNum([windowSizes.length-1, 0])}
+
     if (e.deltaY > 0 && num[0] + 1 < pages.length && num[1] == windowSizes[num[0]]-1) {
       // scroll down
       setNum([w+1,0]);
@@ -47,20 +56,24 @@ export default  function Page(){
     else if(e.deltaY < 0 && num[1] > 0){
       setNum([w,sw-1]);
     }
+    return ()=>clearTimeout(ret);
   }, 150);
+
+  
 
   window.addEventListener("wheel", handleScroll);
 
   return () => {
     window.removeEventListener("wheel", handleScroll);
+   
   };
 }, [num]);
 
 
   console.log("pagelength: "+ pages.length);
   return (
-   <AnimatePresence >
-    <OuterContent background={pageColors[num[0]+num[1]]} num={num[0]}>
+   <AnimatePresence mode="wait">
+    <OuterContent background={PageColorMap[pageColors[num[0]]?.[num[1]]]?.["950"] ?? PageColorMap["neutral"]["950"]} num={num[0]}>
       <motion.div ref={containerRef} className=" w-full h-full flex flex-1 items-center  "
       style={{userSelect: "none"}}
       >
