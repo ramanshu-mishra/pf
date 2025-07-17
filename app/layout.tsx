@@ -64,7 +64,7 @@ export const metadata:Metadata = {
     description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer, Undergraduate Student at NIT-Jalandhar, Builder of cool things. Lover of clean code an chaos",
     site: "@RamanshuSharan",
     creator: "@RamanshuSharan",
-    images: ["/og.png","/og2.png"],
+    images: ["/og.png"],
   },
   icons: {
     icon: "/favicon.ico",
