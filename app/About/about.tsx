@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 // import { windowStore } from "../store";
 import { devTools, skills } from "../projects/projectConfig";
 import SplitedText from "../components/SplittedText/SplittedText";
-import Tag from "../components/tag";
+
 
 export default function Page() {
   const staggerChildren = {

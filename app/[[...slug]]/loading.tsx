@@ -20,7 +20,7 @@ export default function Page(){
             }}
         >
             <motion.div layoutId= "profile-image" >          
-            <Card cords = {cords} hover = {hover}></Card>
+            <Card cords = {cords} ></Card>
             </motion.div>
             <motion.div layoutId="loader-text">
                  <LoaderFour className={"text-5xl"} text="BOOTING RSM"></LoaderFour>

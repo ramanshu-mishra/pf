@@ -19,8 +19,8 @@ import About from "../About/about";
 import Contact from "../Contact/contact";
 
 const pages: React.ReactNode[] = [<Home key={1}></Home>, <Projects key={2} ></Projects>, <About key={3}></About>, <Contact key={4}></Contact>];
-import { pageColors,PageColorMap,windowSizes} from "../projects/projectConfig"
-import { matchesGlob } from "path";
+import { windowSizes} from "../projects/projectConfig"
+
 
 export default  function Page(){
   const containerRef = useRef<HTMLDivElement|null>(null);
@@ -159,7 +159,7 @@ export default  function Page(){
         >
             {/* <Image  width={0}
             className=" {` shadow-cardShadow mt-2 border-solid dark:border-0  border-neutral-400 rounded-full hover:scale-[1.02] active:scale-[0.98] transition-scale duration-300  w-[300] md:w-[380] md:translate-y-5 lg:translate-y-0  sm:w-[380] overflow-hidden sm:translate-y-1 relative `}" src={profile} alt="profile" ></Image> */}
-            <Card hover={hover} cords={mousePosition}></Card>
+            <Card  cords={mousePosition}></Card>
         </motion.div>
         
       <div className=" text-4xl flex-wrap flex lg:absolute lg:text-8xl  sm:text-6xl md:text-7xl bottom-2 justify-center md:w-full md:gap-6 " >

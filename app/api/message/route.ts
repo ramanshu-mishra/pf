@@ -3,6 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { IMessage, message } from "../model/model";
 import { connectDB } from "@/app/lib/db";
 await connectDB();
+interface ContactType {
+  name: string;
+  contact: string;
+  message: string;
+}
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
@@ -14,6 +19,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ status: false, message: "invalid data" }, { status: 400 })
     }
     try {
+        //@ts-ignore
          d = await message.create({ name: name, contact: contact, message: msg });
         console.log(d);
     }

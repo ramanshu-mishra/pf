@@ -3,15 +3,15 @@ import Navbar from "../navbar/navbar"
 import SplitedText from "../SplittedText/SplittedText"
 import {IconBrandGithub, IconBrandTwitter} from "@tabler/icons-react"
 import LinkedIn from "../../assets/linkedIn"
-import {AnimatePresence, motion,  useAnimate, useMotionTemplate, useMotionValue} from "motion/react";
+import {AnimatePresence, motion,  useAnimate} from "motion/react";
 import { useMousePosition, windowStore } from "../../store"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import Head from "next/head"
 import { pageColors,PageColorMap} from "../../projects/projectConfig"
 
 const titles = ["", "Projects", "About", "Connect"];
 
-export default function Page({className, children, }:{className?: string, children:React.ReactNode}) {
+export default function Page({ children, }:{className?: string, children:React.ReactNode}) {
     const [scope,animate]  = useAnimate();
         const nm = windowStore(store=>store.indices);
         

@@ -1,8 +1,8 @@
 "use client"
-import Link from "next/link";
+
 import { AnimatePresence, AnimationPlaybackControlsWithThen, motion, stagger, useAnimate} from "motion/react"
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+
 import { IconBrandGithub, IconBrandTwitter } from "@tabler/icons-react";
 import LinkedIn from "../../assets/linkedIn"
 import { windowStore } from "@/app/store";
