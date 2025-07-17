@@ -9,7 +9,7 @@ import  Image from "next/image";
 import { useRelMousePosition } from "./store";
 
 
-export default function Card({cords,hover}: {cords: {x:number,y:number}, hover:boolean}) {
+export default function Card({cords}: {cords: {x:number,y:number}}) {
     const relcord = useRelMousePosition((state)=>state.mousePosition);
     const setRelcord = useRelMousePosition((state)=>state.updatePosition);
     const ref = useRef<HTMLDivElement|null>(null);
