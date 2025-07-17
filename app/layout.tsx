@@ -29,7 +29,7 @@ const Jockey = Jockey_One({
 //   description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer and Undergraduate Student at NIT-Jalandhar",
 // };
 
-export const metadata = {
+export const metadata:Metadata = {
   title: "Ramanshu Sharan Mishra - Portfolio",
   description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer, Undergraduate Student at NIT-Jalandhar, Builder of cool things. Lover of clean code an chaos",
   keywords: ["Next.js", "React", "Ramanshu", "Ramanshu Sharan Mishra", "Sharan", "Mishra", "Ramanshu Mishra", "Ramanshu Sharan", "Ram", "Indophoenix", "phoenix", "ramspace", "Ramspace", "Space"],
