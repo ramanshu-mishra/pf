@@ -167,7 +167,7 @@ export default function Page({ children, }:{className?: string, children:React.R
                   animate={{x: mousePosition.x - 20, y: mousePosition.y-20}} transition={{type: "spring" , stiffness: 300, damping: 30 ,duration: 0.2}}>
                     
                   </motion.span>
-                  <motion.span className="w-5 h-5 dark:bg-white bg-black rounded-full fixed z-[2051] " style={{
+                  <motion.span className="w-5 h-5 bg-white  rounded-full fixed z-[2051] " style={{
                     left: 0,
                     top: 0,
                     position: "fixed",
@@ -221,7 +221,7 @@ export default function Page({ children, }:{className?: string, children:React.R
                     <a target="_black" href="https://github.com/ramanshu-mishra"><IconBrandGithub className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300 h-8 w-8" /></a>
                     <a target="_black" href="https://x.com/RamanshuSharan"><IconBrandTwitter className="hover:scale-[1.3] active:scale-[0.98] transition-all duration-300 h-8 w-8" /></a>
                     <a target="_black" href="https://www.linkedin.com/in/ramanshu-sharan-mishra-29905627b/"> 
-                    <LinkedIn classes="text-black dark:text-neutral-50 h-8 w-8"></LinkedIn>
+                    <LinkedIn classes=" text-neutral-50 h-8 w-8"></LinkedIn>
                     </a>
                     <a target="_blank" download={"/Resume_Ramanshu_Sharan_Mishra.pdf"} href={"/Resume_Ramanshu_Sharan_Mishra.pdf"}><div className="font-bold hover:scale-[1.2] active:scale-[0.98] transition-all duration-300 text-xl">Resume</div></a>
                 </div>

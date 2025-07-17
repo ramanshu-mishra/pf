@@ -171,7 +171,7 @@ export default  function Page(){
 
       {/* code for image and name --done */}
        
-      <motion.div layoutId="loader-text" className="text-center text-xl font-bold italic text-neutral-700 dark:text-neutral-50"> I am someone who is trying to build something</motion.div>
+      <motion.div layoutId="loader-text" className="text-center text-xl font-bold italic text-neutral-50"> I am someone who is trying to build something</motion.div>
 
 
       <div className="flex flex-1 basis-0 flex-col sm:flex-row  gap-5 sm:gap-10 items-center md:translate-y-0 lg:translate-y-15 w-full justify-center  " >
