@@ -90,7 +90,7 @@ export default function Page({ children, }:{className?: string, children:React.R
         style={{userSelect: "none"}}
         
         >
-          <motion.div className="absolute h-full w-full overflow-hidden ">
+          <motion.div className="absolute h-full w-full overflow-hidden  ">
 <svg
   className="h-full w-full left-0 bottom-0 stroke-neutral-100 opacity-15 z-0"
   viewBox="0 0 1202 1080"

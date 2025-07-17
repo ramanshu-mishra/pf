@@ -111,10 +111,8 @@ export default  function Page(){
 
  function Home() {
   const [scope,animate]  = useAnimate();
-  const connectHovered = useConnectStore(state=>state.conenctHover);
-  const aboutHovered = useAboutHover(state=>state.aboutHover);
-  const setConnectHovered = useConnectStore(state=>state.setConnectHover);
-  const setAboutHovered = useAboutHover(state=>state.setAboutHover);
+ 
+
   const mousePosition = useMousePosition((state) => state.mousePosition);
   const setNum = windowStore(state=>state.setIndices);
   
@@ -174,43 +172,36 @@ export default  function Page(){
       <motion.div layoutId="loader-text" className="text-center text-xl font-bold italic text-neutral-50"> I am someone who is trying to build something</motion.div>
 
 
-      <div className="flex flex-1 basis-0 flex-col sm:flex-row  gap-5 sm:gap-10 items-center md:translate-y-0 lg:translate-y-15 w-full justify-center  " >
+      <div className="flex flex-1 basis-0 flex-col sm:flex-row  gap-5 sm:gap-10 items-center md:translate-y-0 lg:translate-y-15 w-full justify-center  z-55 " >
       <motion.div className="max-w-[18rem] w-[18rem] md:w-[18rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow "
      style={{
-              fontSize: connectHovered ? "120%" : "100%",
-              backgroundColor: connectHovered ? "var(--color-neutral-700)" : "var(--color-neutral-100)",
-              fontWeight: connectHovered ? "bold" : 500,
-              letterSpacing: connectHovered ? "0.2rem" : "0rem",
+              fontSize:  "100%",
+              backgroundColor: "var(--color-neutral-100)",
+              fontWeight:  500,
+              letterSpacing: "0rem",
             }}
           onClick={()=>setNum([3,0])}
       whileHover={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
       whileTap={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
-        onTouchStart={() => setConnectHovered(true)}
-            onTouchEnd={() => setConnectHovered(false)}
-            onTouchCancel={() => setConnectHovered(false)}
+       
       >Connect</motion.div>
       <motion.div className="max-w-[18rem] w-[18rem] md:w-[18rem] flex justify-center items-center py-3 text-black rounded-2xl hover:text-gray-50 active:text-gray-50 h-12 shadow-cardShadow"
        style={{
-              fontSize: aboutHovered ? "120%" : "100%",
-              backgroundColor: aboutHovered ? "var(--color-neutral-700)" : "var(--color-neutral-100)",
-              fontWeight: aboutHovered ? "bold" : 500,
-              letterSpacing: aboutHovered ? "0.2rem" : "0rem",
+              fontSize:  "100%",
+              backgroundColor:  "var(--color-neutral-100)",
+              fontWeight:  500,
+              letterSpacing:  "0rem",
             }}
       whileHover={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
       whileTap={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
-        onTouchStart={() => setAboutHovered(true)}
-            onTouchEnd={() => setAboutHovered(false)}
-            onTouchCancel={() => setAboutHovered(false)}
+       
             onClick={()=>setNum([2,0])}
       >About</motion.div>
     </div>
     </div>
     
     {/* main content code done */}
-
-
-    
-     
+            
    </div>
 
 
