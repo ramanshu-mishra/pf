@@ -29,29 +29,32 @@ const Jockey = Jockey_One({
 //   description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer and Undergraduate Student at NIT-Jalandhar",
 // };
 
-export const metadata:Metadata = {
+export const metadata: Metadata = {
   title: "Ramanshu Sharan Mishra - Portfolio",
-  description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer, Undergraduate Student at NIT-Jalandhar, Builder of cool things. Lover of clean code an chaos",
-  keywords: ["Next.js", "React", "Ramanshu", "Ramanshu Sharan Mishra", "Sharan", "Mishra", "Ramanshu Mishra", "Ramanshu Sharan", "Ram", "Indophoenix", "phoenix", "ramspace", "Ramspace", "Space"],
-  authors: [{ name: "Ramanshu Sharan Mishra", url: "https://ramspace.fun" }],
+  description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer, Undergraduate Student at NIT-Jalandhar, Builder of cool things. Lover of clean code and chaos",
+  keywords: [
+    "Next.js", "React", "Ramanshu", "Ramanshu Sharan Mishra", "Sharan", "Mishra",
+    "Ramanshu Mishra", "Ramanshu Sharan", "Ram", "Indophoenix", "phoenix", "ramspace", "Ramspace", "Space"
+  ],
+  authors: [{ name: "Ramanshu Sharan Mishra", url: "https://www.ramspace.fun" }],
   creator: "Ramanshu Sharan Mishra",
-  metadataBase: new URL("https://ramspace.fun"), // ✅ required for dynamic images and canonical
+  metadataBase: new URL("https://www.ramspace.fun"),
   alternates: {
-    canonical: "/",
+    canonical: "https://www.ramspace.fun/",
     languages: {
-      "en-US": "/en-US",
+      "en-US": "https://www.ramspace.fun/en-US",
     },
   },
   openGraph: {
     title: "Ramanshu Sharan Mishra - Portfolio",
-    description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer, Undergraduate Student at NIT-Jalandhar, Builder of cool things. Lover of clean code an chaos",
-    url: "https://ramspace.fun",
+    description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer, Undergraduate Student at NIT-Jalandhar, Builder of cool things. Lover of clean code and chaos",
+    url: "https://www.ramspace.fun",
     siteName: "ramspace",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/og.png",
+        url: "https://www.ramspace.fun/og.png",
         width: 1200,
         height: 630,
         alt: "Ramanshu Sharan Mishra",
@@ -61,16 +64,17 @@ export const metadata:Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Ramanshu Sharan Mishra - Portfolio",
-    description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer, Undergraduate Student at NIT-Jalandhar, Builder of cool things. Lover of clean code an chaos",
+    description: "Portfolio of Ramanshu Sharan Mishra. Full Stack Web Developer, Undergraduate Student at NIT-Jalandhar, Builder of cool things. Lover of clean code and chaos",
     site: "@RamanshuSharan",
     creator: "@RamanshuSharan",
-    images: ["/og.png"],
+    images: ["https://www.ramspace.fun/og.png"],
   },
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
   },
 };
+
 
 
 
