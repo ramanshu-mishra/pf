@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Card from "../card";
 import { useAboutHover, useConnectStore, useMousePosition, windowStore } from "../store";
 
+
 // import Navbar from "../components/navbar/navbar"
 import OuterContent from "../components/outerContent/outerContent"
 
@@ -19,6 +20,7 @@ import Contact from "../Contact/contact";
 
 const pages: React.ReactNode[] = [<Home key={1}></Home>, <Projects key={2} ></Projects>, <About key={3}></About>, <Contact key={4}></Contact>];
 import { pageColors,PageColorMap,windowSizes} from "../projects/projectConfig"
+import { matchesGlob } from "path";
 
 export default  function Page(){
   const containerRef = useRef<HTMLDivElement|null>(null);
@@ -27,53 +29,55 @@ export default  function Page(){
   const setNum = windowStore(state=>state.setIndices);
   const scrolling = useRef(false);
 
-  
+    const numRef = useRef(num);
+ useEffect(() => {
+    numRef.current = num;
+  }, [num]);
+
   useEffect(() => {
-    
-  const handleScroll =  debounce((e: WheelEvent)=>{
-    if(scrolling.current)return;
-    scrolling.current = true;
-    const ret =  setTimeout(()=>{
-      scrolling.current = false;
-    }, 150);
-    console.log(num);
-    const w = num[0];
-    const sw = num[1];
+    const handleScroll = debounce((e: WheelEvent) => {
+      if (scrolling.current) return;
+      if(Math.abs(e.deltaY) < 1)return;
+      scrolling.current = true;
+      setTimeout(() => {
+        scrolling.current = false;
+      }, 400);
 
-    if(num[1] < 0){setNum([0,0]); return;}
-    if (num[1] >= windowSizes.length){setNum([windowSizes.length-1, 0])}
 
-    if (e.deltaY > 0 && num[0] + 1 < pages.length && num[1] == windowSizes[num[0]]-1) {
-      // scroll down
-      setNum([w+1,0]);
-    } else if (e.deltaY < 0 && num[0] - 1 >= 0 && num[1]== 0 ) {
-      // scroll up
-      setNum([w-1,windowSizes[w-1]-1]);
-    }
-    else if(e.deltaY > 0 && num[1] < windowSizes[num[0]]-1){
-      setNum([w,sw+1]);
-    }
-    else if(e.deltaY < 0 && num[1] > 0){
-      setNum([w,sw-1]);
-    }
-    return ()=>clearTimeout(ret);
-  }, 150);
+      let del = e.deltaY;
+      del = Math.min(del,1);
+      
+      const w = numRef.current[0];
+      const sw = numRef.current[1];
+      const maxSub = windowSizes[w] - 1;
 
-  
+      if (del > 0) {
+        if (sw < maxSub) {
+          setNum([w, sw + 1]);
+        } else if (w + 1 < pages.length) {
+          setNum([w + 1, 0]);
+        }
+      } else {
+        if (sw > 0) {
+          setNum([w, sw - 1]);
+        } else if (w > 0) {
+          setNum([w - 1, windowSizes[w - 1] - 1]);
+        }
+      }
+    }, 20)
 
-  window.addEventListener("wheel", handleScroll);
+    window.addEventListener("wheel", handleScroll, { passive: false });
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+    };
+  }, []);
 
-  return () => {
-    window.removeEventListener("wheel", handleScroll);
-   
-  };
-}, [num]);
 
 
   console.log("pagelength: "+ pages.length);
   return (
    <AnimatePresence mode="wait">
-    <OuterContent background={PageColorMap[pageColors[num[0]]?.[num[1]]]?.["950"] ?? PageColorMap["neutral"]["950"]} num={num[0]}>
+    <OuterContent >
       <motion.div ref={containerRef} className=" w-full h-full flex flex-1 items-center  "
       style={{userSelect: "none"}}
       >
@@ -112,6 +116,7 @@ export default  function Page(){
   const setConnectHovered = useConnectStore(state=>state.setConnectHover);
   const setAboutHovered = useAboutHover(state=>state.setAboutHover);
   const mousePosition = useMousePosition((state) => state.mousePosition);
+  const setNum = windowStore(state=>state.setIndices);
   
 
   function FadingName(){
@@ -177,6 +182,7 @@ export default  function Page(){
               fontWeight: connectHovered ? "bold" : 500,
               letterSpacing: connectHovered ? "0.2rem" : "0rem",
             }}
+          onClick={()=>setNum([3,0])}
       whileHover={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
       whileTap={{fontSize: "120%", backgroundColor: "var(--color-neutral-700)", fontWeight: "bold", letterSpacing: "0.2rem"}}
         onTouchStart={() => setConnectHovered(true)}
@@ -195,6 +201,7 @@ export default  function Page(){
         onTouchStart={() => setAboutHovered(true)}
             onTouchEnd={() => setAboutHovered(false)}
             onTouchCancel={() => setAboutHovered(false)}
+            onClick={()=>setNum([2,0])}
       >About</motion.div>
     </div>
     </div>

@@ -5,16 +5,19 @@ import {IconBrandGithub, IconBrandTwitter} from "@tabler/icons-react"
 import LinkedIn from "../../assets/linkedIn"
 import {AnimatePresence, motion,  useAnimate, useMotionTemplate, useMotionValue} from "motion/react";
 import { useMousePosition, windowStore } from "../../store"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Head from "next/head"
 import { pageColors,PageColorMap} from "../../projects/projectConfig"
 
 const titles = ["", "Projects", "About", "Connect"];
 
-export default function Page({className, children, background, num}:{className?: string, children:React.ReactNode, background: string, num:number}) {
+export default function Page({className, children, }:{className?: string, children:React.ReactNode}) {
     const [scope,animate]  = useAnimate();
         const nm = windowStore(store=>store.indices);
-    
+        
+        
+
+
          function TriggerSlider() {
   const currentTheme = PageColorMap[pageColors[nm[0]]?.[nm[1]]] ?? PageColorMap["neutral"];
   
@@ -46,7 +49,7 @@ export default function Page({className, children, background, num}:{className?:
         animate(".outer-pointer", 
           {
             scale: 1,
-            zIndex: 2
+            zIndex: 2050
           },
           {
             duration: 0
@@ -79,15 +82,62 @@ export default function Page({className, children, background, num}:{className?:
   
 }, []);
 
+
+
     return (
         <motion.div ref={scope} className="fixed inset-0 w-screen h-screen flex flex-col justify-between items-center overflow-y-auto" 
-        animate={{backgroundColor: background}}
+        animate={{backgroundColor: PageColorMap[pageColors[nm[0]]?.[nm[1]]]?.["950"] ?? PageColorMap["neutral"]["950"]}}
         style={{userSelect: "none"}}
+        
         >
+          <motion.div className="absolute h-full w-full overflow-hidden ">
+<svg
+  className="h-full w-full left-0 bottom-0 stroke-neutral-100 opacity-15 z-0"
+  viewBox="0 0 1202 1080"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  style={{ pointerEvents: "none" }}
+>
+  <motion.path
+    d="M1621.88 -47.1813C1451.86 -40.9397 1088.86 85.9397 996.98 543.524C905.102 1001.11 422.711 1152.88 193 1171.56"
+    strokeWidth="3"
+    strokeLinecap="round"
+    
+    initial={{ pathLength: 0 }}
+    animate={{ pathLength: [0,1,1,0,0] }}
+    transition={{
+      duration: 4,
+      times: [0,0.33,0.66,0.9,1],
+      ease: "linear",
+      repeat: Infinity,
+      repeatType: "loop",
+      
+    }}
+  />
+  <motion.path
+    d="M1710.67 356.612C1545.47 315.917 1161.58 338.213 947.557 752.964C733.532 1167.71 228.009 1181.15 2.00008 1136.03" 
+    strokeWidth="3"
+    strokeLinecap="round"
+    initial={{ pathLength: 0 }}
+    animate={{ pathLength: [0,1,1,0,0] }}
+    transition={{
+      duration: 4,
+      times: [0,0.33,0.66,0.9,1],
+      ease: "linear",
+      repeat: Infinity,
+      repeatType: "loop",
+      delay: 1
+    }}
+  />
+</svg>
+
+          </motion.div>
+         
+
           <AnimatePresence mode="wait">
-            {titles[num] && (
+            {titles[nm[0]] && (
               <motion.div
-                key={num}
+                key={nm[0]}
                 className="w-fit absolute right-4 text-5xl my-auto inset-y-0 h-fit font-semibold"
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -95,7 +145,7 @@ export default function Page({className, children, background, num}:{className?:
                 transition={{ duration: 0.4 }}
                 style={{ transformOrigin: "right" }}
               >
-                {titles[num]}
+                {titles[nm[0]]}
               </motion.div>
             )}
           </AnimatePresence>
@@ -108,7 +158,7 @@ export default function Page({className, children, background, num}:{className?:
         {/* <meta name="robots" content="index, follow" /> */}
         </Head>
              {/* code for custom pointer */}
-                  <motion.span className="w-8 h-8 bg-transparent rounded-full fixed z-[1048]  outer-pointer " style={{
+                  <motion.span className="w-8 h-8 bg-transparent rounded-full fixed z-[2050]  outer-pointer " style={{
                     left: 0,
                     top: 0,
                     position: "fixed",
@@ -117,7 +167,7 @@ export default function Page({className, children, background, num}:{className?:
                   animate={{x: mousePosition.x - 20, y: mousePosition.y-20}} transition={{type: "spring" , stiffness: 300, damping: 30 ,duration: 0.2}}>
                     
                   </motion.span>
-                  <motion.span className="w-5 h-5 dark:bg-white bg-black rounded-full fixed z-[1049] " style={{
+                  <motion.span className="w-5 h-5 dark:bg-white bg-black rounded-full fixed z-[2051] " style={{
                     left: 0,
                     top: 0,
                     position: "fixed",
@@ -126,7 +176,7 @@ export default function Page({className, children, background, num}:{className?:
                   animate={{x: mousePosition.x - 12, y: mousePosition.y-12}} transition={{type: "spring" , stiffness: 300, damping: 30 ,duration: 0.2}}>
                     
                   </motion.span>
-                   <motion.span className="w-2 h-2 bg-white  rounded-full fixed z-[1050]  mix-blend-difference " style={{
+                   <motion.span className="w-2 h-2 bg-white  rounded-full fixed z-[2052]  mix-blend-difference " style={{
                     left: 0,
                     top: 0,
                     position: "fixed",

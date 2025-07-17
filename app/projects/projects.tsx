@@ -32,10 +32,10 @@ export default function Main() {
   useEffect(() => {
     const handleScroll = debounce((e: WheelEvent) => {
       console.log("num is: " + num);
-      if (e.deltaY > 0 && num[1] + 1 < projects.length) {
+      if (e.deltaY > 0 && num[0] == 1 && num[1] + 1 < projects.length) {
         console.log("scrolled down");
         setNum([num[0], num[1] + 1]);
-      } else if (e.deltaY < 0 && num[1] - 1 >= 0) {
+      } else if (e.deltaY < 0 && num[0] == 1 &&  num[1] - 1 >= 0) {
         console.log("scrolled up");
         setNum([num[0], num[1] - 1]);
       }
@@ -60,12 +60,12 @@ export default function Main() {
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        exit={{ y: 100, opacity: 0 }}
+        exit={{ y: 40, opacity: 0 }}
       >
         
         <div
           className={cn(
-            `relative aspect-5/3 w-full min-w-80 rounded-3xl p-2 lg:p-4 md:w-[90%] md:min-w-[90%] lg:h-110 lg:min-h-110 lg:w-180 lg:min-w-180 xl:h-125 xl:min-h-125 xl:w-210 xl:min-w-210 2xl:h-130 2xl:min-h-130 2xl:w-250 2xl:min-w-250  `,
+            `relative aspect-5/3 w-full min-w-80 rounded-3xl p-2 lg:p-4 md:w-[90%] md:min-w-[90%] lg:h-110 lg:min-h-110 lg:w-180 lg:min-w-180 xl:h-125 xl:min-h-125 xl:w-210 xl:min-w-210 2xl:h-125 2xl:min-h-125 2xl:w-240 2xl:min-w-240  `,
           )}
           style={{ backgroundColor: bgColorMap[projects[num[1]].bg]["900"] }}
         >
