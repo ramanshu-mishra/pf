@@ -1,5 +1,5 @@
 import Image from "next/image"
-import cryptoTracker from "../assets/projectImages/cryptoTracker.png";
+import DreamMotion from "../assets/projectImages/DreamMotion.png";
 import recall from "../assets/projectImages/recall.png";
 interface projectInterface {
   title: string;
@@ -40,21 +40,21 @@ export const projects: projectInterface[] = [
     link: "https://recall-rho.vercel.app/"
   },
   {
-    title: "Crypto Price Tracker",
-    type: "A simple platform to get price and volume updates for Crypto Currencies",
+    title: "Dream Motion Landing Page",
+    type: "Landing page for AI animation SAAS platform",
     description:
-      "A simple API wrapper for price and Volume changes of top performing crypto currencies and with filter support",
-    tags: ["React.js", "TypeScript", "TailwindCSS"],
+      "A clean and shower landing page for AI animation SAAS platform DreamMotion",
+    tags: ["Next.js", "TypeScript", "Motion.dev"],
     image: (
       <Image
         alt={"ram"}
         width={0}
-        src={cryptoTracker}
+        src={DreamMotion}
         className="h-full w-full"
       ></Image>
     ),
     bg: "violet",
-    link: "https://crypto-tracker-eight-henna.vercel.app/"
+    link: "https://dream-motion-landing-page.vercel.app/"
   },
 ];
 
