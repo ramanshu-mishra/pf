@@ -1,6 +1,7 @@
 import Image from "next/image"
 import DreamMotion from "../assets/projectImages/DreamMotion.png";
 import recall from "../assets/projectImages/recall.png";
+import talksy from "../assets/projectImages/talksy.png";
 interface projectInterface {
   title: string;
   type: string;
@@ -22,6 +23,23 @@ interface projectInterface {
 }
 
 export const projects: projectInterface[] = [
+    {
+    title: "Talksy",
+    type: "Bookmarking and note-taking while you browse",
+    description:
+      "Meetings strangers around the word made easy through Talksy. A random person peer to peer video conferrensing application.",
+    tags: [ "WebRTC","TypeScript","NodeJs", "WebSockets" ,"NextJS", "TailwindCSS"],
+    image: (
+      <Image
+        alt={"talksy"}
+        width={0}
+        src={talksy}
+        className="h-full w-full"
+      ></Image>
+    ),
+    bg: "yellow",
+    link: "https://talksy.fun/"
+  },
   {
     title: "Recall",
     type: "Bookmarking and note-taking while you browse",
@@ -79,11 +97,31 @@ export const bgColorMap = {
     "50": "#faf5ff",
     "900/50": "rgba(88, 28, 135, 0.5)",
   },
+  yellow: {
+    "950": "#422006",
+    "900": "#713f12",
+    "800": "#854d0e",
+    "400": "#facc15",
+    "200": "#fef08a",
+    "100": "#fef9c3",
+    "50": "#fefce8",
+    "900/50": "rgba(113, 63, 18, 0.5)",
+  },
 };
 
 
 
 export const PageColorMap = {
+  yellow: {
+    "950": "#422006",
+    "900": "#713f12",
+    "800": "#854d0e",
+    "400": "#facc15",
+    "200": "#fef08a",
+    "100": "#fef9c3",
+    "50": "#fefce8",
+    "900/50": "rgba(113, 63, 18, 0.5)",
+  },
    blue: {
     "950": "#172554",
     "900": "#1e3a8a",
@@ -125,9 +163,9 @@ export const PageColorMap = {
     "900/50": "rgba(23, 23, 23, 0.5)",
   }
 }
-export const pageColors: string[][]=[["neutral"],["blue", "violet"],["cyan"],["neutral"]];
+export const pageColors: string[][]=[["neutral"],["yellow","blue", "violet"],["cyan"],["neutral"]];
 export const windowSizes: number[] = [1,2,1,1];
 
-export const skills: string[] = ["React.js(Redux, Zustand)", "Next.js", "JavaScript(ES6+)", "TailwindCSS" , "Framer-Motion", "Express.js","WebSockets","PostgressDB", "MongoDB", "MySQL"]
+export const skills: string[] = ["React.js(Redux, Zustand)", "Next.js", "JavaScript(ES6+)", "WebRTC","TailwindCSS" , "Framer-Motion", "Express.js","WebSockets","PostgressDB", "MongoDB", "MySQL","MonoRepo"]
 
-export const devTools: string[] = ["TypeScript", "Git", "Docker", "Prisma-ORM"]
+export const devTools: string[] = ["TypeScript", "Git", "Docker", "Prisma-ORM", "TurboRepo"]
