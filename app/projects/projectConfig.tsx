@@ -2,6 +2,7 @@ import Image from "next/image"
 import DreamMotion from "../assets/projectImages/DreamMotion.png";
 import recall from "../assets/projectImages/recall.png";
 import talksy from "../assets/projectImages/talksy.png";
+import cofeeshare from "../assets/projectImages/cofeeshare.png";
 interface projectInterface {
   title: string;
   type: string;
@@ -25,7 +26,7 @@ interface projectInterface {
 export const projects: projectInterface[] = [
     {
     title: "Talksy",
-    type: "Bookmarking and note-taking while you browse",
+    type: "A platform to meet strangers over the internet",
     description:
       "Meetings strangers around the word made easy through Talksy. A random person peer to peer video conferrensing application.",
     tags: [ "WebRTC","TypeScript","NodeJs", "WebSockets" ,"NextJS", "TailwindCSS"],
@@ -39,6 +40,23 @@ export const projects: projectInterface[] = [
     ),
     bg: "yellow",
     link: "https://talksy.fun/"
+  },
+  {
+    title: "CofeeShare",
+    type: "A peer to peer data sharing paltform",
+    description:
+      "A peer to peer data sharing platform levereging WebRTC. ",
+    tags: ["WebRTC","TypeScript","NodeJs", "WebSockets" ,"NextJS", "TailwindCSS"],
+    image: (
+      <Image
+        alt={"ram"}
+        width={0}
+        src={cofeeshare}
+        className="h-full w-full"
+      ></Image>
+    ),
+    bg: "teal",
+    link: "https://cofeeshare.app/"
   },
   {
     title: "Recall",
@@ -107,11 +125,31 @@ export const bgColorMap = {
     "50": "#fefce8",
     "900/50": "rgba(113, 63, 18, 0.5)",
   },
+  teal:{
+     "950": "#042f2e",
+    "900": "#134e4a",
+    "800": "#115e59",
+    "400": "#2dd4bf",
+    "200": "#99f6e4",
+    "100": "#ccfbf1",
+    "50": "#f0fdfa",
+    "900/50": "rgba(19, 78, 74, 0.5)",
+  }
 };
 
 
 
 export const PageColorMap = {
+  teal:{
+     "950": "#042f2e",
+    "900": "#134e4a",
+    "800": "#115e59",
+    "400": "#2dd4bf",
+    "200": "#99f6e4",
+    "100": "#ccfbf1",
+    "50": "#f0fdfa",
+    "900/50": "rgba(19, 78, 74, 0.5)",
+  },
   yellow: {
     "950": "#422006",
     "900": "#713f12",
@@ -163,8 +201,8 @@ export const PageColorMap = {
     "900/50": "rgba(23, 23, 23, 0.5)",
   }
 }
-export const pageColors: string[][]=[["neutral"],["yellow","blue", "violet"],["cyan"],["neutral"]];
-export const windowSizes: number[] = [1,2,1,1];
+export const pageColors: string[][]=[["neutral"],["yellow","teal","blue", "violet"],["cyan"],["neutral"]];
+export const windowSizes: number[] = [1,4,1,1];
 
 export const skills: string[] = ["React.js(Redux, Zustand)", "Next.js", "JavaScript(ES6+)", "WebRTC","TailwindCSS" , "Framer-Motion", "Express.js","WebSockets","PostgressDB", "MongoDB", "MySQL","MonoRepo"]
 
